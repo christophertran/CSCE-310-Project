@@ -20,7 +20,7 @@
     "nodemon": "1.11.0"
   },
   "dependencies": {
-    "bcrypt": "1.0.2",
+    "bcryptjs": "^2.4.3",
     "body-parser": "1.17.1",
     "connect-pg-simple": "4.2.0",
     "cookie-parser": "1.4.3",

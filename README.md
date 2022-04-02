@@ -33,7 +33,7 @@ DOS helps you start building Node.js projects faster. DOS is a boilerplate proje
 Passport with LocalStrategy & Postgres is configured for login endpoints. Since registration is often app & domain specific, there is no configuration for registration endpoint. The easiest way to see how admin site work, you need to insert manually. You need to generate password for admin using `bcrypt`. In project directory run `node` and then:
 
 ```
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const pass = 'you password goes here'
 const saltRounds = 10 //the higher the better - the longer it takes to generate & compare
 bcrypt.hashSync(pass, saltRounds)

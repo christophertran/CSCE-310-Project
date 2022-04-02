@@ -46,6 +46,7 @@ module.exports = (app, passport, pool) => {
 		store: new pgSession({
 			pool
 		}),
+		saveUninitialized: true,
 		secret: config.session_secret,
 		resave: false,
 		cookie: { maxAge: 14 * 24 * 60 * 60 * 1000 }
