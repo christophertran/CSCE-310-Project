@@ -1,6 +1,5 @@
 const pg = require('pg')
 const config = require('../config')
-const winston = require('winston')
 
 const dbConfig = {
 	user: config.db.user,
@@ -14,7 +13,7 @@ const dbConfig = {
 
 const pool = new pg.Pool(dbConfig)
 pool.on('error', function (err) {
-	winston.error('idle client error', err.message, err.stack)
+	console.error('idle client error', err.message, err.stack)
 })
 
 module.exports = {

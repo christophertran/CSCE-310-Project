@@ -8,7 +8,6 @@ const pgSession = require('connect-pg-simple')(session)
 const cookieParser = require('cookie-parser')
 const methodOverride = require('method-override')
 const morgan = require('morgan')
-const winston = require('winston')
 const config = require('./')
 
 const env = process.env.NODE_ENV || 'development'
@@ -18,7 +17,7 @@ module.exports = (app, passport, pool) => {
 	if (env !== 'development') {
 		log = {
 			stream: {
-				write: message => winston.info(message)
+				write: message => console.log(message)
 			}
 		}
 	}

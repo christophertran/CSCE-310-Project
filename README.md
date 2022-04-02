@@ -90,8 +90,6 @@ npm test
 
 - pg -> https://github.com/brianc/node-postgres - Non-blocking PostgreSQL client for Node.js
 
-- winston -> https://github.com/winstonjs/winston - Logging library for Node.js with support for multiple transports. Winston provides many features beside normal `console` statements like default & custom loggers, multiple transports, streaming logs, different log levels.
-
 ### Authors
 
 Marek Piechut [@marekpiechut](http://twitter.com/@marekpiechut)

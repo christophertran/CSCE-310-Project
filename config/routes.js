@@ -1,4 +1,3 @@
-const winston = require('winston')
 const { requiresLogin, requiresAdmin } = require('./middlewares/authorization')
 const admin = require('../app/admin')
 const users = require('../app/users')
@@ -20,7 +19,7 @@ module.exports = (app, passport, db) => {
 			return next()
 		}
 
-		winston.error(err.stack)
+		console.error(err.stack)
 
 		return res.status(500).json({error: 'Error on backend occurred.'})
 	})
