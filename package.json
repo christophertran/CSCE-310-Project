@@ -1,43 +1,37 @@
 {
-  "name": "node-boilerplate",
+  "name": "csce-310-project",
   "version": "1.0.0",
-  "description": "",
+  "description": "csce 310 project",
   "main": "server.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=development nodemon server.js",
-    "debug": "cross-env NODE_ENV=development nodemon --debug server.js",
-    "test": "cross-env NODE_ENV=test jest"
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "engines": {
-    "node": ">=6.x"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/christophertran/CSCE-310-Project.git"
   },
-  "author": "dayone.pl",
-  "license": "MIT",
-  "devDependencies": {
-    "cross-env": "5.0.0",
-    "eslint": "3.19.0",
-    "jest": "20.0.3",
-    "nodemon": "1.11.0"
+  "author": "Christopher Tran",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/christophertran/CSCE-310-Project/issues"
   },
+  "homepage": "https://github.com/christophertran/CSCE-310-Project#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "body-parser": "^1.17.1",
-    "connect-pg-simple": "^4.2.0",
-    "cookie-parser": "^1.4.3",
-    "express": "^4.15.2",
-    "express-handlebars": "^3.0.0",
-    "express-session": "^1.15.2",
-    "express-validator": "^3.2.0",
-    "method-override": "^2.3.8",
-    "morgan": "^1.8.1",
-    "passport": "^0.3.2",
+    "connect-pg-simple": "^7.0.0",
+    "cookie-parser": "^1.4.6",
+    "ejs": "^3.1.6",
+    "express": "^4.17.3",
+    "express-session": "^1.17.2",
+    "method-override": "^3.0.0",
+    "passport": "^0.5.2",
     "passport-local": "^1.0.0",
-    "pg": "^7.1.2"
+    "pg": "^8.7.3"
   },
-  "jest": {
-    "testPathIgnorePatterns": [
-      "<rootDir>/config/",
-      "/node_modules/"
-    ]
+  "devDependencies": {
+    "eslint": "^8.12.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4"
   }
 }

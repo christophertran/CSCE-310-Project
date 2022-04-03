@@ -1,27 +1,21 @@
+const OFF = 0;
+const WARN = 1;
+const ERROR = 2;
+
 module.exports = {
-	"env": {
-		"commonjs": true,
-		"node": true,
-		"es6": true
-	},
-	"extends": "eslint:recommended",
-	"rules": {
-		"indent": [
-			"error",
-			"tab"
-		],
-		"linebreak-style": [
-			"error",
-			"unix"
-		],
-		"quotes": [
-			"error",
-			"single"
-		],
-		"semi": [
-			"error",
-			"never"
-		],
-		"no-process-env": "off"
-	}
+    env: {
+        browser: true,
+        es2021: true,
+        node: true,
+    },
+    extends: [
+        'airbnb-base',
+    ],
+    parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+    },
+    rules: {
+        indent: [WARN, 4],
+    },
 };

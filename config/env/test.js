@@ -1,4 +1,4 @@
 module.exports = {
-	db: {},
-	session_secret: 'test'
-}
+    db: {},
+    session_secret: 'test',
+};
