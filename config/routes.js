@@ -1,5 +1,4 @@
 const { isLoggedIn, requiresLogin } = require('./middlewares/authorization');
-const ExpressError = require('../utils/ExpressError');
 const users = require('../app/users');
 const monitoring = require('../app/monitoring');
 
@@ -27,7 +26,7 @@ module.exports = (app, passport, db) => {
 
     app.get('/health', monitoring.health(db));
 
-    app.get('*', (req, res, next) => {
-        next(new ExpressError('Page Not Found', 404));
+    app.get('*', (req, res) => {
+        res.sendStatus(404);
     });
 };

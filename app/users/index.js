@@ -32,15 +32,10 @@ module.exports = {
         res.redirect('/home');
     },
 
-    logout: (req, res, next) => {
-        req.session.destroy((err) => {
-            if (err) return next(err);
-
-            req.logout();
-
-            req.flash('success', 'Successfully logged out!');
-            return res.redirect('/login');
-        });
+    logout: (req, res) => {
+        req.logout();
+        req.flash('success', 'Successfully logged out!');
+        return res.redirect('/login');
     },
 
     renderHome: (req, res) => {
