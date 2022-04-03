@@ -14,11 +14,12 @@ module.exports = {
 
         db.query('INSERT INTO users(username, password, type) VALUES ($1, $2, $3);', [username, hash, user], (err, result) => {
             if (err || result.rowCount !== 1) {
-                console.error('Error inserting new user.', err);
-                res.redirect('/register');
+                req.flash('error', `Error Registering User. Error Code: ${err.code}`);
+                return res.redirect('/register');
             }
 
-            res.redirect('/login');
+            req.flash('success', 'Welcome!');
+            return res.redirect('/login');
         });
     },
 
@@ -27,6 +28,7 @@ module.exports = {
     },
 
     login: (req, res) => {
+        req.flash('success', 'Welcome back!');
         res.redirect('/panel');
     },
 

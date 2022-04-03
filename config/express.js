@@ -4,6 +4,7 @@ const session = require('express-session');
 const PGSession = require('connect-pg-simple')(session);
 const cookieParser = require('cookie-parser');
 const methodOverride = require('method-override');
+const flash = require('connect-flash');
 const config = require('.');
 
 module.exports = (app, passport, pool) => {
@@ -32,6 +33,8 @@ module.exports = (app, passport, pool) => {
 
     app.use(passport.initialize());
     app.use(passport.session());
+
+    app.use(flash());
 
     app.use('/', express.static(path.join(config.root, 'public')));
 };

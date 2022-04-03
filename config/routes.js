@@ -4,6 +4,12 @@ const users = require('../app/users');
 const monitoring = require('../app/monitoring');
 
 module.exports = (app, passport, db) => {
+    app.use((req, res, next) => {
+        res.locals.error = req.flash('error');
+        res.locals.success = req.flash('success');
+        next();
+    });
+
     app.get('/', (req, res) => {
         res.json('Hello World');
     });

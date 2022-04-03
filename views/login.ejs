@@ -1,25 +1,21 @@
-<html>
-	<head>
-		<title>Login</title>
-		<link href="/main.css" rel="stylesheet" >
-	</head>
-	<body>
-		<div class='container'>
-			<form class='login-form' name='login' action='/login' method='POST' >
-				<div>
-					<div>
-						<div class='relative'>
-							<input placeholder='username' name='username' required/>
-						</div>
-						<div class='relative'>
-							<input placeholder='password' type='password' name='password' required/>
-						</div>
-					</div>
+<%- include("partials/header.ejs") %>
+
+<div class='container'>
+	<form class='login-form' name='login' action='/login' method='POST' >
+		<div>
+			<div>
+				<div class='relative'>
+					<input placeholder='username' name='username' required/>
 				</div>
-				<button type='submit'>
-					Log in
-				</button>
-			</form>
+				<div class='relative'>
+					<input placeholder='password' type='password' name='password' required/>
+				</div>
+			</div>
 		</div>
-	</body>
-</html>
+		<button type='submit'>
+			Log in
+		</button>
+	</form>
+</div>
+
+<%- include("partials/footer.ejs") %>
