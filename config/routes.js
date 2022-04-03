@@ -1,5 +1,5 @@
-const { requiresLogin, requiresAdmin } = require('./middlewares/authorization');
-const admin = require('../app/admin');
+const { isLoggedIn, requiresLogin } = require('./middlewares/authorization');
+const ExpressError = require('../utils/ExpressError');
 const users = require('../app/users');
 const monitoring = require('../app/monitoring');
 
@@ -8,13 +8,19 @@ module.exports = (app, passport, db) => {
         res.json('Hello World');
     });
 
-    app.post('/api/login', passport.authenticate('local'), users.login);
-    app.get('/api/logout', users.logout);
-    app.get('/api/ping', requiresLogin, users.ping);
+    app.get('/register', isLoggedIn, users.renderRegister);
+    app.post('/register', users.register);
 
-    app.get('/admin/login', admin.renderLogin);
-    app.post('/admin/login', passport.authenticate('local', { failureRedirect: '/admin/login' }), admin.login);
-    app.get('/admin/panel', requiresAdmin, admin.renderPanel);
+    app.get('/login', isLoggedIn, users.renderLogin);
+    app.post('/login', passport.authenticate('local', { failureRedirect: '/login' }), users.login);
+
+    app.get('/logout', users.logout);
+
+    app.get('/panel', requiresLogin, users.renderPanel);
 
     app.get('/health', monitoring.health(db));
+
+    app.get('*', (req, res, next) => {
+        next(new ExpressError('Page Not Found', 404));
+    });
 };

@@ -1,22 +1,46 @@
+const bcrypt = require('bcryptjs');
+const db = require('../../db');
+
 module.exports = {
-	login: (req, res) => {
-		const { user } = req
+    renderRegister: (req, res) => {
+        res.render('register');
+    },
 
-		res.json(user)
-	},
+    register: (req, res) => {
+        const { username, password } = req.body;
+        const user = 'user';
+        const saltRounds = 10;
+        const hash = bcrypt.hashSync(password, saltRounds);
 
-	logout: (req, res, next) => {
-		req.session.destroy((err) => {
-			if(err) return next(err)
+        db.query('INSERT INTO users(username, password, type) VALUES ($1, $2, $3);', [username, hash, user], (err, result) => {
+            if (err || result.rowCount !== 1) {
+                console.error('Error inserting new user.', err);
+                res.redirect('/register');
+            }
 
-			req.logout()
+            res.redirect('/login');
+        });
+    },
 
-			res.sendStatus(200)
-		})
-	},
+    renderLogin: (req, res) => {
+        res.render('login');
+    },
 
-	ping: function(req, res) {
-		res.sendStatus(200)
-	}
-}
+    login: (req, res) => {
+        res.redirect('/panel');
+    },
 
+    logout: (req, res, next) => {
+        req.session.destroy((err) => {
+            if (err) return next(err);
+
+            req.logout();
+
+            return res.sendStatus(200);
+        });
+    },
+
+    renderPanel: (req, res) => {
+        res.render('user-panel');
+    },
+};

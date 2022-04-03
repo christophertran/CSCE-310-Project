@@ -1,7 +1,7 @@
 const path = require('path');
 const express = require('express');
 const session = require('express-session');
-const pgSession = require('connect-pg-simple')(session);
+const PGSession = require('connect-pg-simple')(session);
 const cookieParser = require('cookie-parser');
 const methodOverride = require('method-override');
 const config = require('.');
@@ -17,7 +17,7 @@ module.exports = (app, passport, pool) => {
 
     app.use(cookieParser());
     app.use(session({
-        store: new pgSession({
+        store: new PGSession({
             pool,
         }),
         saveUninitialized: true,

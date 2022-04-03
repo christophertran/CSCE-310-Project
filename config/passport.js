@@ -11,7 +11,7 @@ module.exports = (passport, db) => {
 
             if (result.rows.length > 0) {
                 const first = result.rows[0];
-                bcrypt.compare(password, first.password, (err, res) => {
+                bcrypt.compare(password, first.password, (_, res) => {
                     if (res) {
                         cb(null, { id: first.id, username: first.username, type: first.type });
                     } else {
@@ -21,6 +21,8 @@ module.exports = (passport, db) => {
             } else {
                 cb(null, false);
             }
+
+            return 0;
         });
     }));
 
@@ -36,6 +38,8 @@ module.exports = (passport, db) => {
             }
 
             cb(null, results.rows[0]);
+
+            return 0;
         });
     });
 };
