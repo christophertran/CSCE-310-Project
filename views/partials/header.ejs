@@ -27,7 +27,24 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-dark fixed-top bg-dark bg">
+    <nav class="navbar navbar-dark fixed-top bg-dark bg" style="padding: 0 20px">
+        <h1><a href="/" style="color: white; text-decoration: none;">CSCE 310 Project</a></h1>
+        <% if (!currentUser) { %>
+            <div style="display:flex;">
+                <li class="sidenav-item">
+                    <a href="/login" data-toggle="tooltip" data-placement="bottom" title="Login" style="color: white; text-decoration: none;"><i class="fas fa-sign-in-alt"></i> Login</a>
+                </li>
+                <li class="sidenav-item">
+                    <a href="/register" data-toggle="tooltip" data-placement="bottom" title="Register" style="color: white; text-decoration: none;"><i class="fas fa-user-plus"></i> Register</a>
+                </li>
+            </div>
+        <% } else { %>
+            <div>
+                <li class="sidenav-item">
+                    <a href="/logout" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="fas fa-sign-out-alt" style="color: white; text-decoration: none;"></i> Logout</a>
+                </li>
+            </div>
+        <% } %>
     </nav>
 
     <div class="container">

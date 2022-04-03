@@ -18,7 +18,7 @@ module.exports = {
                 return res.redirect('/register');
             }
 
-            req.flash('success', 'Welcome!');
+            req.flash('success', `Successfully registered ${username}!`);
             return res.redirect('/login');
         });
     },
@@ -29,7 +29,7 @@ module.exports = {
 
     login: (req, res) => {
         req.flash('success', 'Welcome back!');
-        res.redirect('/panel');
+        res.redirect('/home');
     },
 
     logout: (req, res, next) => {
@@ -38,11 +38,12 @@ module.exports = {
 
             req.logout();
 
-            return res.sendStatus(200);
+            req.flash('success', 'Successfully logged out!');
+            return res.redirect('/login');
         });
     },
 
-    renderPanel: (req, res) => {
-        res.render('user-panel');
+    renderHome: (req, res) => {
+        res.render('home');
     },
 };
