@@ -3,7 +3,7 @@ const db = require('../../db');
 
 module.exports = {
     renderRegister: (req, res) => {
-        res.render('register');
+        return res.render('register');
     },
 
     register: (req, res) => {
@@ -24,12 +24,12 @@ module.exports = {
     },
 
     renderLogin: (req, res) => {
-        res.render('login');
+        return res.render('login');
     },
 
     login: (req, res) => {
         req.flash('success', 'Welcome back!');
-        res.redirect('/home');
+        return res.redirect('/home');
     },
 
     logout: (req, res) => {
@@ -39,6 +39,6 @@ module.exports = {
     },
 
     renderHome: (req, res) => {
-        res.render('home');
+        return res.render('home');
     },
 };
