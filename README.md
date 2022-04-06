@@ -1,15 +1,56 @@
 # CSCE-310-Project
 
-Original skeleton code from [here](https://github.com/DayOnePl/dos-server) and modified to work with Node v16.
+Original skeleton code from [here](https://github.com/DayOnePl/dos-server) and modified to work with Node v16. The original article with additional explanation can be found [here](https://reallifeprogramming.com/node-authentication-with-passport-postgres-ef93e2d520e7).
 
-##
-
-## How to get setup
+## Getting started
 1. Ensure you have node v16 installed. Instructions can be found [here](https://nodejs.org/en/download/).
 1. Clone the repo from [here](https://github.com/christophertran/CSCE-310-Project.git).
 1. Go into the repo, once in the repo, run `npm i` to install all the `package.json` dependencies.
 1. After installing, a `node_modules` folder should appear.
 1. To run the node server, run `npm start`.
+
+## Before submitting a commit
+1. Ensure that you lint the files so that we keep some form of formatting consistency.
+1. Do this by running `npx eslint --fix .` before every commit. This will fix any small formatting errors, but also let you know if you have any other egregious errors. Some errors can be ignored on a case by case basis.
+
+## File structure
+### `app/`
+- `monitoring/`
+    - `index.js`
+- `users/`
+    - `index.js`
+
+### `config/`
+- `env/`
+    - `development.js`
+    - `production.js`
+    - `test.js`
+- `middleware/`
+    - `authorization.js`
+- `express.ejs`
+- `index.ejs`
+- `passport.ejs`
+- `routes.ejs`
+
+### `db/`
+- `index.js`
+
+### `public/`
+- `images/`
+    - `logo.png`
+- `stylesheets/`
+    - `main.css`
+
+### `views/`
+- `partials/`
+    - `flash.ejs`
+    - `footer.ejs`
+    - `header.ejs`
+- `home.ejs`
+- `landing.ejs`
+- `login.ejs`
+- `register.ejs`
+
 
 ## package.json packages
 - bcryptjs -> https://github.com/dcodeIO/bcrypt.js - One of the most fundamental security concern is storing passwords in application. In DOS we're using bcypt to generate salt and hash passwords. bcrypt is a password hashing function. bcrypt uses salt to protect against rainbow table attacks. What is crucial, bcrypt is adaptive function -> over time the iteration time can be increased in order to make it slower to remain resistant to increasing computation power. NPM package is using native implementation of bcrypt. 
