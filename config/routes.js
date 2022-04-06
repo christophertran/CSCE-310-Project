@@ -20,9 +20,7 @@ module.exports = (app, passport, db) => {
     app.get('/login', isLoggedIn, users.renderLogin);
     app.post('/login', passport.authenticate('local', { failureRedirect: '/login' }), users.login);
 
-    app.get('/logout', users.logout);
-
-    app.get('/home', requiresLogin, users.renderHome);
+    app.get('/logout', requiresLogin, users.logout);
 
     app.get('/health', monitoring.health(db));
 

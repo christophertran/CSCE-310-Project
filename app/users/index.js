@@ -2,9 +2,7 @@ const bcrypt = require('bcryptjs');
 const db = require('../../db');
 
 module.exports = {
-    renderRegister: (req, res) => {
-        return res.render('register');
-    },
+    renderRegister: (req, res) => res.render('register'),
 
     register: (req, res) => {
         const { username, password } = req.body;
@@ -23,22 +21,20 @@ module.exports = {
         });
     },
 
-    renderLogin: (req, res) => {
-        return res.render('login');
-    },
+    renderLogin: (req, res) => res.render('login'),
 
     login: (req, res) => {
         req.flash('success', 'Welcome back!');
-        return res.redirect('/home');
+
+        const redirectUrl = req.session.returnTo || '/';
+        delete req.session.returnTo;
+
+        res.redirect(redirectUrl);
     },
 
     logout: (req, res) => {
         req.logout();
         req.flash('success', 'Successfully logged out!');
         return res.redirect('/login');
-    },
-
-    renderHome: (req, res) => {
-        return res.render('home');
     },
 };

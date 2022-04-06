@@ -1,7 +1,7 @@
 module.exports = {
     isLoggedIn: (req, res, next) => {
-        if (req.user) {
-            return res.redirect('/panel');
+        if (req.isAuthenticated()) {
+            return res.redirect(req.originalUrl);
         }
 
         return next();
