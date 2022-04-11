@@ -1,22 +1,39 @@
 <%- include("partials/header.ejs") %>
 
-<div class='container'>
-	<form class='login-form' name='login' action='/login' method='POST' >
-		<div>
-			<h1 style="color: white">Login</h1>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<%- include("partials/header") %>
+
+	<!-- Custom CSS -->
+	<link rel="stylesheet" type="text/css" href="/stylesheets/login.css" />
+</head>
+
+<body>
+	<%- include("partials/navbar") %>
+	<%- include('partials/flash') %>
+
+	<div class='container'>
+		<form class='login-form' name='login' action='/login' method='POST' >
 			<div>
-				<div class='relative'>
-					<input placeholder='username' name='username' required/>
-				</div>
-				<div class='relative'>
-					<input placeholder='password' type='password' name='password' required/>
+				<h1 style="color: white">Login</h1>
+				<div>
+					<div class='relative'>
+						<input placeholder='username' name='username' required/>
+					</div>
+					<div class='relative'>
+						<input placeholder='password' type='password' name='password' required/>
+					</div>
 				</div>
 			</div>
-		</div>
-		<button type='submit'>
-			Log in
-		</button>
-	</form>
-</div>
+			<button type='submit'>
+				Log in
+			</button>
+		</form>
+	</div>
 
-<%- include("partials/footer.ejs") %>
+	<%- include("partials/footer") %>
+</body>
+
+</html>
