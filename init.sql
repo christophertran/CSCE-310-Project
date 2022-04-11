@@ -61,7 +61,7 @@ CREATE TABLE "reviews"(
     "content" varchar(255) NOT NULL,
     "rating" bigint NOT NULL,
     "creating_date" date NOT NULL,
-    CONSTRAINT "reviews_pkey PRIMARY KEY" ("id")
+    CONSTRAINT "reviews_pkey" PRIMARY KEY ("id")
 );
 
 CREATE TABLE "to_read"(
