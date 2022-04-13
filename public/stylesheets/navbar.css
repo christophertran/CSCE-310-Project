@@ -1,0 +1,50 @@
+.colorNpadding {
+	padding: 0 30px; 
+	background-color: #f9cb9cff;
+}
+
+.good-font{
+	color:cadetblue;
+}
+
+.logo-font{
+	font-family: "Times New Roman", Times, serif;
+	font-size: 3rem;
+	text-decoration:none;
+	color:gray;
+}
+
+
+.right-side{
+	justify-content: space-between;
+}
+
+.nav-link{
+	text-decoration:none;
+	color:aliceblue;
+}
+
+.nav-link:hover {
+	border-top-left-radius: 6px !important;
+	border-top-right-radius: 6px !important;
+    border-bottom-left-radius: 6px !important;
+	border-bottom-right-radius: 6px !important;
+	width: auto !important;  
+	height: auto !important;
+
+    background-color:lightsteelblue;
+    color: cadetblue;
+  }
+
+.logo-font:hover {
+	border-top-left-radius: 6px !important;
+	border-top-right-radius: 6px !important;
+	border-bottom-left-radius: 6px !important;
+	border-bottom-right-radius: 6px !important;
+	width: auto !important;  
+	height: auto !important;
+
+	color:gray;
+
+	background-color:lightsteelblue;
+}

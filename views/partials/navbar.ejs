@@ -1,21 +1,23 @@
-<nav class="navbar navbar-light fixed-top" style="padding: 0 30px; background-color: #f9cb9cff;">
-    <a class="navbar-brand" href="/">
-        <img src="/images/logo.png" width="60" height="60" class="d-inline-block align-top" alt="">
-        GoodBooks
+<link rel="stylesheet" type="text/css" href="/stylesheets/navbar.css" />
+
+<nav class="navbar fixed-top colorNpadding" >
+
+    <a class="navbar-brand logo-font" href="/">
+        <img src="/images/logo.png" width="60" height="60" class="d-inline-block align-top" alt="goodbooks">
+        <i class="good-font">good</i>books
     </a>
+
     <% if (!currentUser) { %>
-        <div style="display:flex;">
-            <li>
-                <a href="/login" data-toggle="tooltip" data-placement="bottom" title="Login"><i class="fas fa-sign-in-alt"></i> Login</a>
-            </li>
-            <li>
-                <a href="/register" data-toggle="tooltip" data-placement="bottom" title="Register"><i class="fas fa-user-plus"></i> Register</a>
-            </li>
+        <div class="row">
+  
+            <a href="/login" title="Login" class="nav-link display-5 fw-bold col-5">Login</a>
+
+            <a href="/register" title="Register"class="nav-link display-5 fw-bold col-5">Register</a>
         </div>
     <% } else { %>
         <div>
             <li>
-                <a href="/logout" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                <a href="/logout" title="Logout" class="nav-link display-5 fw-bold col-5">Logout</a>
             </li>
         </div>
     <% } %>

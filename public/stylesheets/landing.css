@@ -1,0 +1,12 @@
+.imgbox{
+	display: grid;
+	padding:0; 
+	margin:0;
+}
+
+.homepage-img{
+	height: 80%;
+	max-width: 100%;
+	width: 100%;
+	margin: auto;
+}
