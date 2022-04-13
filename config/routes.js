@@ -24,6 +24,36 @@ module.exports = (app, passport, db) => {
 
     app.get('/health', monitoring.health(db));
 
+    // Render the page for a single author
+    app.get('/author', (req, res) => {
+        res.render('authors/author')
+    });
+
+    // Render the page for a single book
+    app.get('/books', (req, res) => {
+        res.render('books/book')
+    });
+
+    // Render the page for a single club
+    app.get('/clubs', (req, res) => {
+        res.render('clubs/club')
+    });
+
+    // Render the page for a single event
+    app.get('/events', (req, res) => {
+        res.render('events/event')
+    });
+
+    // Render the page for a single list
+    app.get('/lists', (req, res) => {
+        res.render('lists/list')
+    });
+
+    // Render the page for a single user
+    app.get('/users', (req, res) => {
+        res.render('users/user')
+    });
+
     app.get('*', (req, res) => {
         res.sendStatus(404);
     });
