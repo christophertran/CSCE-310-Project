@@ -1,5 +1,6 @@
 .imgbox{
 	display: grid;
+	position: relative;
 	padding:0; 
 	margin:0;
 }
@@ -9,4 +10,30 @@
 	max-width: 100%;
 	width: 100%;
 	margin: auto;
+}
+
+.overlay{
+	position:absolute;
+	top:5rem;
+	right:3rem;
+	color:black;
+	font-size: medium;
+	position: absolute;
+    width: 20%;
+    height: 30%;
+    z-index: 1;
+    margin: 30px;
+}
+
+.slogan{
+	position:absolute;
+	top:5rem;
+	right: 37%;
+	color:black;
+	font-size: medium;
+	position: absolute;
+    width: 20%;
+    height: 30%;
+    z-index: 1;
+    margin: 30px;
 }
