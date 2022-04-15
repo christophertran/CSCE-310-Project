@@ -7,17 +7,23 @@
         <i class="good-font">good</i>books
     </a>
 
+    <div class="row">
+        <a href="/lists" title="Lists" class="nav-link display-6 fw-bold col-5">Lists</a>
+        <a href="/clubs" title="Clubs" class="nav-link display-6 fw-bold col-5">Clubs</a>
+        <a href="/books" title="Browse" class="nav-link display-6 fw-bold col-5">Browse</a>
+        <a href="/events" title="Events" class="nav-link display-6 fw-bold col-5">Events</a>
+    </div>
+
     <% if (!currentUser) { %>
         <div class="row">
-  
-            <a href="/login" title="Login" class="nav-link display-5 fw-bold col-5">Login</a>
+            <a href="/login" title="Login" class="nav-link display-6 fw-bold col-5">Login</a>
 
-            <a href="/register" title="Register"class="nav-link display-5 fw-bold col-5">Register</a>
+            <a href="/register" title="Register"class="nav-link display-6 fw-bold col-5">Register</a>
         </div>
     <% } else { %>
         <div>
             <li>
-                <a href="/logout" title="Logout" class="nav-link display-5 fw-bold col-5">Logout</a>
+                <a href="/logout" title="Logout" class="nav-link display-6 fw-bold col-5">Logout</a>
             </li>
         </div>
     <% } %>

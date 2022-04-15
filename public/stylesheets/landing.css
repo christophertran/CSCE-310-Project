@@ -27,8 +27,9 @@
 
 .slogan{
 	position:absolute;
-	top:5rem;
-	right: 37%;
+	top:40%;
+    left:50%;
+    transform:translate(-60%, -50%);
 	color:black;
 	font-size: medium;
 	position: absolute;

@@ -19,9 +19,18 @@
 	justify-content: space-between;
 }
 
+.row{
+	display: table;
+}
+
 .nav-link{
 	text-decoration:none;
 	color:aliceblue;
+	display: table-cell;
+}
+
+.nav-link:visited {
+    color:aliceblue;
 }
 
 .nav-link:hover {
