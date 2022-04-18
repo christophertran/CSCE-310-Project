@@ -2,6 +2,8 @@ const bcrypt = require('bcryptjs');
 const db = require('../../db');
 
 module.exports = {
+    renderUser: (req, res) => res.render('users/user'),
+
     renderRegister: (req, res) => res.render('register'),
 
     register: (req, res) => {

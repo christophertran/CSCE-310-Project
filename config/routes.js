@@ -1,6 +1,10 @@
 const { isLoggedIn, requiresLogin } = require('./middlewares/authorization');
+const authors = require('../app/authors');
+const books = require('../app/books');
+const clubs = require('../app/clubs');
+const events = require('../app/events');
+const lists = require('../app/lists');
 const users = require('../app/users');
-const monitoring = require('../app/monitoring');
 
 module.exports = (app, passport, db) => {
     app.use((req, res, next) => {
@@ -22,37 +26,23 @@ module.exports = (app, passport, db) => {
 
     app.get('/logout', requiresLogin, users.logout);
 
-    app.get('/health', monitoring.health(db));
-
     // Render the page for a single author
-    app.get('/author', (req, res) => {
-        res.render('authors/author')
-    });
+    app.get('/author', authors.renderAuthor);
 
     // Render the page for a single book
-    app.get('/books', (req, res) => {
-        res.render('books/book')
-    });
+    app.get('/books', books.renderBook);
 
     // Render the page for a single club
-    app.get('/clubs', (req, res) => {
-        res.render('clubs/club')
-    });
+    app.get('/clubs', clubs.renderClub);
 
     // Render the page for a single event
-    app.get('/events', (req, res) => {
-        res.render('events/event')
-    });
+    app.get('/events', events.renderEvent);
 
     // Render the page for a single list
-    app.get('/lists', (req, res) => {
-        res.render('lists/list')
-    });
+    app.get('/lists', lists.renderList);
 
     // Render the page for a single user
-    app.get('/users', (req, res) => {
-        res.render('users/user')
-    });
+    app.get('/users', users.renderUser);
 
     app.get('*', (req, res) => {
         res.sendStatus(404);

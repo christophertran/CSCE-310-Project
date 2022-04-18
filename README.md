@@ -15,7 +15,15 @@ Original skeleton code from [here](https://github.com/DayOnePl/dos-server) and m
 
 ## File structure
 ### `app/`
-- `monitoring/`
+- `author/`
+    - `index.js`
+- `books/`
+    - `index.js`
+- `clubs/`
+    - `index.js`
+- `events/`
+    - `index.js`
+- `lists/`
     - `index.js`
 - `users/`
     - `index.js`
