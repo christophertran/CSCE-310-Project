@@ -27,9 +27,9 @@
 
 .slogan{
 	position:absolute;
-	top:40%;
+	top:50%;
     left:50%;
-    transform:translate(-60%, -50%);
+    transform:translate(-50%, -50%);
 	color:black;
 	font-size: medium;
 	position: absolute;
@@ -37,4 +37,33 @@
     height: 30%;
     z-index: 1;
     margin: 30px;
+}
+
+.grid{
+	display:grid;
+	grid-template-columns: 2fr 1fr;
+	column-gap: 100px;
+	margin: 0 10% ;
+}
+
+.subgrid{
+	display:grid;
+	grid-template-columns: 1fr 1fr;
+	column-gap: 100px;
+	padding:  2rem;
+}
+
+.authorbox{
+	outline: 4px solid black;
+	text-align: center;
+	padding: 2rem;
+}
+
+.promobox{
+	background-color: #d9ead3ff;
+	border-top-left-radius: 30px;
+	border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+	border-bottom-right-radius: 30px;
+	padding: 2rem;
 }
