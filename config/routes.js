@@ -29,7 +29,8 @@ module.exports = (app, passport, db) => {
     app.get('/author', authors.renderAuthor);
 
     // Render the page for a single book
-    app.get('/books', books.renderBook);
+    app.get('/books', books.renderBooks);
+    app.get('/book/:id', books.renderBook);
 
     // Render the page for a single club
     app.get('/clubs', clubs.renderClub);
