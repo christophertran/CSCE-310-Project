@@ -67,3 +67,10 @@
 	border-bottom-right-radius: 30px;
 	padding: 2rem;
 }
+
+.imggrid{
+	display:grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	column-gap: 3rem;
+	margin: 0 10% ;
+}

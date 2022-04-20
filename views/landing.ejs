@@ -26,6 +26,11 @@
 				<p>Flavor text Flavor text Flavor text Flavor text Flavor text Flavor text Flavor text Flavor text Flavor text Flavor text Flavor text Flavor text</p>			</div>
 			<div class="promobox">
 				<p>What will <i>we</i> discover today?</p>
+				<div class="imggrid">
+					<% for(var i=0; i<data.length; i++) {%>
+						<a href="/book/<%= data[i]['id'] %>"><img src="<%= data[i]['cover'] %>" width="128" height="185"></a>
+					<% } %>
+				</div>
 			</div>
 		</div>
 

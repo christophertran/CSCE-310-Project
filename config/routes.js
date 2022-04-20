@@ -5,6 +5,7 @@ const clubs = require('../app/clubs');
 const events = require('../app/events');
 const lists = require('../app/lists');
 const users = require('../app/users');
+const landing = require('../app/landing.js');
 
 module.exports = (app, passport, db) => {
     app.use((req, res, next) => {
@@ -14,9 +15,7 @@ module.exports = (app, passport, db) => {
         next();
     });
 
-    app.get('/', (req, res) => {
-        res.render('landing');
-    });
+    app.get('/', landing.display);
 
     app.get('/register', isLoggedIn, users.renderRegister);
     app.post('/register', users.register);
