@@ -2,7 +2,21 @@ const db = require('../../db');
 
 module.exports = {
     index: (req, res) => {
-        res.render('books/index');
+      const { id } = req.params;
+
+      db.query(
+          'SELECT id, title FROM books',
+          (err2, result) => {
+              if (err2) {
+                  req.flash('error', `Error fetching books. Error Code: ${err2.code}`);
+              }
+
+              // Debugging tool: return res.json(result);
+
+              return res.render('books/index', { data: result.rows });
+          },
+      );
+
     },
 
     showBook: (req, res) => {
@@ -17,6 +31,7 @@ module.exports = {
 
             return res.render('books/show', { book });
         });
+
     },
 
     renderNewForm: (req, res) => res.render('books/new'),
