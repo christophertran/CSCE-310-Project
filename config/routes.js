@@ -15,7 +15,7 @@ module.exports = (app, passport) => {
         next();
     });
 
-    app.get('/', landing.display);
+    app.get('/', landing.renderLanding);
 
     app.get('/register', isLoggedIn, users.renderRegister);
     app.post('/register', users.register);
@@ -30,7 +30,7 @@ module.exports = (app, passport) => {
 
     // Render the page for a single book
     app.get('/books', books.renderBooks);
-    app.get('/book/:id', books.renderBook);
+    app.get('/books/:id', books.renderBook);
 
     // Render the page for a single club
     app.get('/clubs', clubs.renderClub);

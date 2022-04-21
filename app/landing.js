@@ -5,7 +5,7 @@ function getRandNum(min, max) {
 }
 
 module.exports = {
-    display: (req, res) => {
+    renderLanding: (req, res) => {
         db.query('SELECT COUNT (*) FROM books;', (err1, result1) => {
             if (err1) {
                 req.flash('error', `Error fetching book count. Error Code: ${err1.code}`);
