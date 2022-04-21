@@ -5,9 +5,9 @@ const clubs = require('../app/clubs');
 const events = require('../app/events');
 const lists = require('../app/lists');
 const users = require('../app/users');
-const landing = require('../app/landing.js');
+const landing = require('../app/landing');
 
-module.exports = (app, passport, db) => {
+module.exports = (app, passport) => {
     app.use((req, res, next) => {
         res.locals.currentUser = req.user;
         res.locals.error = req.flash('error');
