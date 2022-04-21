@@ -2,36 +2,36 @@
 <html lang="en">
 
 <head>
-	<%- include("partials/header") %>
+    <%- include("partials/header") %>
 
-	<!-- Custom CSS -->
-	<link rel="stylesheet" type="text/css" href="/stylesheets/login.css" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="/stylesheets/login.css" />
 </head>
 
 <body class="outer">
-	<%- include("partials/navbar") %>
-	<%- include('partials/flash') %>
+    <%- include("partials/navbar") %>
+    <%- include('partials/flash') %>
 
-	<div class='container'>
-		<form class='login-form' name='login' action='/login' method='POST' >
-			<div>
-				<h1 style="color: white">Login</h1>
-				<div>
-					<div class='relative'>
-						<input placeholder='username' name='username' required/>
-					</div>
-					<div class='relative'>
-						<input placeholder='password' type='password' name='password' required/>
-					</div>
-				</div>
-			</div>
-			<button type='submit'>
-				Log in
-			</button>
-		</form>
-	</div>
+    <div class='container'>
+        <form class='login-form' name='login' action='/login' method='POST'>
+            <div>
+                <h1 style="color: white">Login</h1>
+                <div>
+                    <div class='relative'>
+                        <input placeholder='username' name='username' required />
+                    </div>
+                    <div class='relative'>
+                        <input placeholder='password' type='password' name='password' required />
+                    </div>
+                </div>
+            </div>
+            <button type='submit'>
+                Log in
+            </button>
+        </form>
+    </div>
 
-	<%- include("partials/footer") %>
+    <%- include("partials/footer") %>
 </body>
 
 </html>

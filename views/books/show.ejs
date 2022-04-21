@@ -2,30 +2,32 @@
 <html lang="en">
 
 <head>
-	<%- include("../partials/header") %>
+    <%- include("../partials/header") %>
 
-	<!-- Custom CSS -->
-	<link rel="stylesheet" type="text/css" href="/stylesheets/books.css" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="/stylesheets/books.css" />
 </head>
 
 <body>
-	<%- include("../partials/navbar") %>
-	<%- include('../partials/flash') %>
+    <%- include("../partials/navbar") %>
+    <%- include('../partials/flash') %>
 
     <!-- Add HTML body here. -->
-	<div>
-		<div class="card" style="width: 18rem;">
-			<img class="card-img-top" src="<%= book['cover'] %>" alt="Card image cap" width="128" height="185">
-			<div class="card-body">
-				<p class="card-text"><%= book['title'] %>.</p>
-				<div class="card-body">
-					Book Description: <%= book['description'] %>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div>
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="<%= book['cover'] %>" alt="Card image cap" width="128" height="185">
+            <div class="card-body">
+                <p class="card-text">
+                    <%= book['title'] %>.
+                </p>
+                <div class="card-body">
+                    Book Description: <%= book['description'] %>
+                </div>
+            </div>
+        </div>
+    </div>
 
-	<%- include("../partials/footer") %>
+    <%- include("../partials/footer") %>
 </body>
 
 </html>

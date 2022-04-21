@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" href="/stylesheets/navbar.css" />
 
-<nav class="navbar fixed-top colorNpadding" >
+<nav class="navbar fixed-top colorNpadding">
 
     <a class="navbar-brand logo-font" href="/">
         <img src="/images/logo.png" width="60" height="60" class="d-inline-block align-top" alt="goodbooks">
@@ -16,16 +16,16 @@
     </div>
 
     <% if (!currentUser) { %>
-        <div class="row">
-            <a href="/login" title="Login" class="nav-link display-6 fw-bold col-5">Login</a>
+    <div class="row">
+        <a href="/login" title="Login" class="nav-link display-6 fw-bold col-5">Login</a>
 
-            <a href="/register" title="Register"class="nav-link display-6 fw-bold col-5">Register</a>
-        </div>
+        <a href="/register" title="Register" class="nav-link display-6 fw-bold col-5">Register</a>
+    </div>
     <% } else { %>
-        <div>
-            <li>
-                <a href="/logout" title="Logout" class="nav-link display-6 fw-bold col-5">Logout</a>
-            </li>
-        </div>
+    <div>
+        <li>
+            <a href="/logout" title="Logout" class="nav-link display-6 fw-bold col-5">Logout</a>
+        </li>
+    </div>
     <% } %>
 </nav>

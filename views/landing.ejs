@@ -2,50 +2,51 @@
 <html lang="en">
 
 <head>
-	<%- include("partials/header") %>
+    <%- include("partials/header") %>
 
-	<!-- Custom CSS -->
-	<link rel="stylesheet" type="text/css" href="/stylesheets/landing.css" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="/stylesheets/landing.css" />
 </head>
 
 <body>
-	<%- include("partials/navbar") %>
-	<%- include('partials/flash') %>
-	<div class="imgbox">
-		<div class="slogan text-center">
-			<p class=" display-5 fw-bold">Find your good book here.</p>
-		</div>
+    <%- include("partials/navbar") %>
+    <%- include('partials/flash') %>
+    <div class="imgbox">
+        <div class="slogan text-center">
+            <p class=" display-5 fw-bold">Find your good book here.</p>
+        </div>
 
-		<img src="/images/line_of_books.jpg" alt="line of books" class="homepage-img">
-	</div>
+        <img src="/images/line_of_books.jpg" alt="line of books" class="homepage-img">
+    </div>
 
-	<div class="grid">
-		<div >
-			<div class="subgrid">
-				<p>Flavor text Flavor text Flavor text Flavor text Flavor text Flavor text Flavor text Flavor text Flavor text Flavor text Flavor text Flavor text</p>
-				<p>Flavor text Flavor text Flavor text Flavor text Flavor text Flavor text Flavor text Flavor text Flavor text Flavor text Flavor text Flavor text</p>			</div>
-			<div class="promobox">
-				<p>What will <i>we</i> discover today?</p>
-				<div class="imggrid">
-					<% for(var i=0; i<data.length; i++) {%>
-						<a href="/book/<%= data[i]['id'] %>"><img src="<%= data[i]['cover'] %>" width="128" height="185"></a>
-					<% } %>
-				</div>
-			</div>
-		</div>
+    <div class="grid">
+        <div>
+            <div class="subgrid">
+                <p>Flavor text Flavor text Flavor text Flavor text Flavor text Flavor text Flavor text Flavor text Flavor text Flavor text Flavor text Flavor text</p>
+                <p>Flavor text Flavor text Flavor text Flavor text Flavor text Flavor text Flavor text Flavor text Flavor text Flavor text Flavor text Flavor text</p>
+            </div>
+            <div class="promobox">
+                <p>What will <i>we</i> discover today?</p>
+                <div class="imggrid">
+                    <% for(var i=0; i<data.length; i++) {%>
+                    <a href="/book/<%= data[i]['id'] %>"><img src="<%= data[i]['cover'] %>" width="128" height="185"></a>
+                    <% } %>
+                </div>
+            </div>
+        </div>
 
-		<div class="authorbox">
-			<h1>Are you an author or a publisher?</h1>
-			<br>
-			<p>Gain access to a massive audience of book lovers. GoodBooks is a great place to promote your books.</p>
-			<br>
-			<button type="button" class="btn btn-lg btn-warning" href="/authors">Author Program</button>
-		</div>
+        <div class="authorbox">
+            <h1>Are you an author or a publisher?</h1>
+            <br>
+            <p>Gain access to a massive audience of book lovers. GoodBooks is a great place to promote your books.</p>
+            <br>
+            <button type="button" class="btn btn-lg btn-warning" href="/authors">Author Program</button>
+        </div>
 
-	</div>
-	
+    </div>
 
-	<%- include("partials/footer") %>
+
+    <%- include("partials/footer") %>
 </body>
 
 </html>
