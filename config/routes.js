@@ -25,23 +25,17 @@ module.exports = (app, passport) => {
 
     app.get('/logout', requiresLogin, users.logout);
 
-    // Render the page for a single author
     app.get('/author', authors.renderAuthor);
 
-    // Render the page for a single book
     app.get('/books', books.renderBooks);
     app.get('/books/:id', books.renderBook);
 
-    // Render the page for a single club
     app.get('/clubs', clubs.renderClub);
 
-    // Render the page for a single event
     app.get('/events', events.renderEvent);
 
-    // Render the page for a single list
     app.get('/lists', lists.renderList);
 
-    // Render the page for a single user
     app.get('/users', users.renderUser);
 
     app.get('*', (req, res) => {
