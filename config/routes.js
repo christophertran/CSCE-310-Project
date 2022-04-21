@@ -27,8 +27,16 @@ module.exports = (app, passport) => {
 
     app.get('/author', authors.renderAuthor);
 
-    app.get('/books', books.renderBooks);
-    app.get('/books/:id', books.renderBook);
+    // Books routes
+    app.get('/books', books.index);
+    app.get('/books/:id', books.showBook);
+
+    app.get('/books/new', books.renderNewForm);
+    app.get('/books/:id/edit', books.renderEditForm);
+
+    app.post('/books', books.createBook);
+    app.put('/books/:id', books.updateBook);
+    app.delete('/books/:id', books.deleteBook);
 
     app.get('/clubs', clubs.renderClub);
 
