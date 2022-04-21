@@ -20,10 +20,13 @@
             <p class="card-text">Book Name. Book pic above.</p>
         </div>
     </div>
-
-    <% for(var i=0; i<data.length; i++) {%>
-      <%= data[i]['title'] %>
-    <% } %>
+    <ul class="list-group">
+      <% for(var i=0; i<data.length; i++) {%>
+        <li class="list-group-item">
+          <%= data[i]['title'] %>
+        </li>
+      <% } %>
+    </ul>
 
     <div class="card">
         <div class="card-body">
