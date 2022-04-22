@@ -1,59 +1,53 @@
 .colorNpadding {
-	padding: 0 30px; 
+	padding: 0 30px;
 	background-color: #f9cb9cff;
 }
 
-.good-font{
-	color:cadetblue;
+.good-font {
+	color: cadetblue;
 }
 
-.logo-font{
+.logo-font {
 	font-family: "Times New Roman", Times, serif;
 	font-size: 3rem;
-	text-decoration:none;
-	color:gray;
+	text-decoration: none;
+	color: gray;
 }
 
-
-.right-side{
+.right-side {
 	justify-content: space-between;
 }
 
-.row{
-	display: table;
+.nav-btn-grp {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
 }
 
-.nav-link{
-	text-decoration:none;
-	color:aliceblue;
-	display: table-cell;
+.nav-link {
+	text-decoration: none;
+	/* color: aliceblue; */
+	color: #808080 !important;
+	font-weight: bold;
+	font-size: 2rem;
 }
 
 .nav-link:visited {
-    color:aliceblue;
+	color: aliceblue;
 }
 
 .nav-link:hover {
-	border-top-left-radius: 6px !important;
-	border-top-right-radius: 6px !important;
-    border-bottom-left-radius: 6px !important;
-	border-bottom-right-radius: 6px !important;
-	width: auto !important;  
+	border-radius: 6px !important;
+	width: auto !important;
 	height: auto !important;
-
-    background-color:lightsteelblue;
-    color: cadetblue;
-  }
+	background-color: lightsteelblue;
+	color: cadetblue;
+}
 
 .logo-font:hover {
-	border-top-left-radius: 6px !important;
-	border-top-right-radius: 6px !important;
-	border-bottom-left-radius: 6px !important;
-	border-bottom-right-radius: 6px !important;
-	width: auto !important;  
+	border-radius: 6px !important;
+	width: auto !important;
 	height: auto !important;
-
-	color:gray;
-
-	background-color:lightsteelblue;
+	color: gray;
+	background-color: lightsteelblue;
 }

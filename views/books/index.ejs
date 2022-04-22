@@ -13,16 +13,16 @@
     <%- include('../partials/flash') %>
 
     <!-- Add HTML body here. -->
-	
-	<button onclick="window.location.href='books/new';"> Add new book </button>
-	
-    <ul class="list-group">
-        <% for(var i=0; i<books.length; i++) {%>
-        <li class="list-group-item">
-            <a href="/books/<%= books[i]['id'] %>"><%= books[i]['title'] %></a>
-        </li>
-        <% } %>
-    </ul>
+    <div class="collection">
+        <a href="books/new"><button class="btn btn-success"> Add new book </button></a>
+        <ul class="list-group">
+            <% for(var i=0; i<books.length; i++) {%>
+            <li class="list-group-item">
+                <a href="/books/<%= books[i]['id'] %>"><%= books[i]['title'] %></a>
+            </li>
+            <% } %>
+        </ul>
+    </div>
 
     <%- include("../partials/footer") %>
 </body>

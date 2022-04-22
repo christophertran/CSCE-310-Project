@@ -1,14 +1,19 @@
-.outer{
-	position: relative;
+.container {
+	width: 60%;
 }
 
-.container{
-	margin-left: auto;
-	margin-right: auto;
-	position: absolute;
-	left:0;
-	right: 0;
-	top: 0;
-	bottom: 0;
+.collection {
+	width: 60%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
 
+.collection > * {
+	margin: 5px 0;
+}
+
+.list-group {
+	width: 100%;
 }

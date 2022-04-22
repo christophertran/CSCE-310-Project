@@ -5,29 +5,27 @@
     <%- include("partials/header") %>
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="/stylesheets/login.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/register.css" />
 </head>
 
-<body class="outer">
+<body>
     <%- include("partials/navbar") %>
     <%- include('partials/flash') %>
 
-    <div class='container'>
-        <form class='register-form' name='register' action='/register' method='POST'>
+    <div class="container">
+        <form class="form" name="register" action="/register" method="POST">
             <div>
-                <h1 style="color: white">Register</h1>
+                <h1>Register</h1>
                 <div>
-                    <div class='relative'>
-                        <input placeholder='username' name='username' required />
+                    <div class="relative">
+                        <input placeholder="username" name="username" required />
                     </div>
-                    <div class='relative'>
-                        <input placeholder='password' type='password' name='password' required />
+                    <div class="relative">
+                        <input placeholder="password" type="password" name="password" required />
                     </div>
                 </div>
             </div>
-            <button type='submit'>
-                Register
-            </button>
+            <button type="submit">Log in</button>
         </form>
     </div>
 
