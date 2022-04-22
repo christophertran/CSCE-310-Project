@@ -10,10 +10,45 @@
 	align-items: center;
 }
 
-.collection > * {
+.collection>* {
 	margin: 5px 0;
 }
 
 .list-group {
 	width: 100%;
+}
+
+.show-container {
+	width: 60%;
+	padding: 20px;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+
+	background-color: #fff;
+	background-clip: border-box;
+	border: 1px solid rgba(0, 0, 0, .125);
+	border-radius: 0.25rem;
+}
+
+.show-container>* {
+	margin: 5px 0;
+
+}
+
+.book-cover-container {
+	width: 100%;
+
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.book-cover-container>img {
+	height: 40vh;
+	object-fit: contain;
+
 }
