@@ -17,5 +17,6 @@ module.exports = {
     },
     rules: {
         indent: [WARN, 4],
+        'linebreak-style': [ERROR, 'windows'],
     },
 };
