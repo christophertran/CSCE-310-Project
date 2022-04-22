@@ -20,7 +20,7 @@ module.exports = {
             ];
 
             db.query(
-                'SELECT id, cover FROM books WHERE id IN ($1, $2, $3, $4);',
+                'SELECT * FROM books WHERE id IN ($1, $2, $3, $4);',
                 [ids[0], ids[1], ids[2], ids[3]],
                 (err2, result2) => {
                     if (err2) {
