@@ -14,25 +14,13 @@
 
     <!-- Add HTML body here. -->
     <br><br><br><br><br><br>
-    <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-            <p class="card-text">Book Name. Book pic above.</p>
-        </div>
-    </div>
     <ul class="list-group">
-      <% for(var i=0; i<data.length; i++) {%>
+        <% for(var i=0; i<data.length; i++) {%>
         <li class="list-group-item">
-          <%= data[i]['title'] %>
+            <%= data[i]['title'] %>
         </li>
-      <% } %>
+        <% } %>
     </ul>
-
-    <div class="card">
-        <div class="card-body">
-            Book Description:
-        </div>
-    </div>
 
     <%- include("../partials/footer") %>
 </body>
