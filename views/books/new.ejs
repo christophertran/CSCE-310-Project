@@ -13,65 +13,54 @@
     <%- include('../partials/flash') %>
 
     <!-- Add HTML body here. -->
-    <div class="row">
-        <h1 class="text-center">New Campground</h1>
-        <div class="col-md-6 offset-md-3">
-            <form action="/campgrounds" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
-                <div class="mb-3">
-                    <label class="form-label" for="title">Title</label>
-                    <input class="form-control" type="text" id="title" name="campground[title]" required>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="location">Location</label>
-                    <input class="form-control" type="text" id="location" name="campground[location]" required>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                </div>
+    <div class="container">
+        <h1 class="text-center">New Book</h1>
+        <form action="/books" method="POST">
+            <div class="mb-3">
+                <label class="form-label" for="title">Title</label>
+                <input class="form-control" type="text" id="title" name="title" required>
+            </div>
 
-                <!-- <div class="mb-3">
-                    <label class="form-label" for="image">Image Url</label>
-                    <input class="form-control" type="text" id="image" name="campground[image]" required>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                </div> -->
-                <div class="mb-3">
-                    <label class="form-label" for="price">Campground Price</label>
-                    <div class="input-group">
-                        <span class="input-group-text" id="price-label">$</span>
-                        <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price" aria-describedby="price-label" name="campground[price]" required>
-                    </div>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                </div>
+            <div class="mb-3">
+                <label class="form-label" for="author">Author</label>
+                <input class="form-control" type="text" id="author" name="author" required>
+            </div>
 
-                <div class="mb-3">
-                    <label class="form-label" for="description">Description</label>
-                    <textarea class="form-control" type="text" id="description" name="campground[description]" required></textarea>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <div class="form-file custom-file">
-                        <input type="file" class="form-file-input" id="image" name="image" multiple>
-                        <label class="form-file-label" for="image">
-                            <span class="form-file-text custom-file-label">Choose image(s)...</span>
-                            <span class="form-file-button">Browse</span>
-                        </label>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <button class="btn btn-success">Add Campground</button>
-                </div>
-            </form>
-            <a href="/campgrounds">All Campgrounds</a>
-        </div>
+            <div class="mb-3">
+                <label class="form-label" for="ISBN">ISBN</label>
+                <input class="form-control" type="number" id="ISBN" name="ISBN" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="cover">Cover</label>
+                <input class="form-control" type="text" id="cover" name="cover" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="country">Country</label>
+                <input class="form-control" type="text" id="country" name="country" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="language">Language</label>
+                <input class="form-control" type="text" id="language" name="language" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="genre">Genre</label>
+                <input class="form-control" type="text" id="genre" name="genre" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="description">Description</label>
+                <textarea class="form-control" type="text" id="description" name="description" required></textarea>
+            </div>
+
+            <div class="mb-3">
+                <button class="btn btn-success">Add Book</button>
+            </div>
+        </form>
+        <a href="/books">All Books</a>
     </div>
 
     <%- include("../partials/footer") %>
