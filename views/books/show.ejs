@@ -8,20 +8,20 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/books.css" />
 </head>
 
-<body>
-    <%- include("../partials/navbar") %>
+<body class="outer">
     <%- include('../partials/flash') %>
+    <%- include("../partials/navbar") %>
 
     <!-- Add HTML body here. -->
-    <div>
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="<%= book['cover'] %>" alt="Card image cap" width="128" height="185">
+    <div class="container w-100">
+        <div class="card w-100 align-items-center">
+            <img class="card-img-top w-25 h-25" src="<%= book['cover'] %>" alt="Card image cap" width="128" height="185">
             <div class="card-body">
-                <p class="card-text">
+                <p class="card-text display-5 fw-bold">
                     <%= book['title'] %>.
                 </p>
                 <div class="card-body">
-                    Book Description: <%= book['description'] %>
+                    <p class="display-7 fw-bold">Book Description:</p> <%= book['description'] %>
                 </div>
             </div>
         </div>
