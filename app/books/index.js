@@ -3,13 +3,13 @@ const db = require('../../db');
 module.exports = {
     index: (req, res) => {
         db.query(
-            'SELECT id, title FROM books',
+            'SELECT * FROM books LIMIT 20',
             (err, result) => {
                 if (err) {
                     req.flash('error', `Error fetching books. Error Code: ${err.code}`);
                 }
 
-                return res.render('books/index', { data: result.rows });
+                return res.render('books/index', { books: result.rows });
             },
         );
     },

@@ -29,7 +29,7 @@ module.exports = {
 
                     // Debugging tool: return res.json(result);
 
-                    return res.render('landing', { data: result2.rows });
+                    return res.render('landing', { books: result2.rows });
                 },
             );
         });
