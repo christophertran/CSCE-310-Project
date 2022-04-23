@@ -2,7 +2,7 @@ const db = require('../../db');
 
 module.exports = {
     index: async (req, res) => {
-        const result = await db.queryAwait('SELECT * FROM books LIMIT 20;');
+        const result = await db.queryAwait('SELECT * FROM books;');
         return res.render('books/index', { books: result.rows });
     },
 
@@ -117,7 +117,7 @@ module.exports = {
     deleteBook: async (req, res) => {
         const { id } = req.params;
 
-        const result = await db.queryAwait('DELETE FROM books WHERE id=$1', [id]);
+        const result = await db.queryAwait('DELETE FROM books WHERE id=$1;', [id]);
 
         if (result.rowCount === 0) {
             req.flash('error', 'Error deleting book!');
@@ -130,7 +130,7 @@ module.exports = {
 
     renderEditForm: async (req, res) => {
         const { id } = req.params;
-        let result = await db.queryAwait('SELECT * FROM books where id = $1;', [id]);
+        let result = await db.queryAwait('SELECT * FROM books where id=$1;', [id]);
 
         if (result.rowCount === 0) {
             req.flash('error', "The book requested doesn't exist!");
@@ -138,7 +138,7 @@ module.exports = {
         }
 
         const [book] = result.rows;
-        result = await db.queryAwait('SELECT * FROM authors where id = $1;', [book.author_id]);
+        result = await db.queryAwait('SELECT * FROM authors where id=$1;', [book.author_id]);
 
         const [author] = result.rows;
         return res.render('books/edit', { book, author });

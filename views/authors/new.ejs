@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../partials/header") %>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="/stylesheets/authors.css" />
+</head>
+
+<body>
+    <%- include("../partials/navbar") %>
+    <%- include('../partials/flash') %>
+
+    <!-- Add HTML body here. -->
+    <div class="container">
+        <h1 class="text-center">New Author</h1>
+        <form action="/authors" method="POST">
+            <div class="mb-3">
+                <label class="form-label" for="first_name">First Name</label>
+                <input class="form-control" type="text" id="first_name" name="first_name" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="last_name">Last Name</label>
+                <input class="form-control" type="text" id="last_name" name="last_name" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="birth_date">Birth Date</label>
+                <input class="form-control" type="text" id="birth_date" name="birth_date" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="website">Wesbite</label>
+                <input class="form-control" type="text" id="website" name="website">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="bio">Bio</label>
+                <textarea class="form-control" type="text" id="bio" name="bio"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <button class="btn btn-success">Add Author</button>
+            </div>
+        </form>
+    </div>
+
+    <%- include("../partials/footer") %>
+</body>
+
+</html>

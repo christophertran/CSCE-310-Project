@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../partials/header") %>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="/stylesheets/authors.css" />
+</head>
+
+<body>
+    <%- include('../partials/flash') %>
+    <%- include("../partials/navbar") %>
+
+    <!-- Add HTML body here. -->
+    <div class="show-container">
+        <div class="card-body">
+            <h5 class="card-title">
+                <%= author['first_name'] %> <%= author['last_name'] %>
+            </h5>
+            <p class="card-text"><%= author['bio'] %></p>
+            <a href="/authors/<%= author['id'] %>/edit" class="btn btn-success">Edit Author</a>
+        </div>
+    </div>
+
+    <%- include("../partials/footer") %>
+</body>
+
+</html>

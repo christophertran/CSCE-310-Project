@@ -26,7 +26,14 @@ module.exports = (app, passport) => {
 
     app.get('/logout', requiresLogin, users.logout);
 
-    app.get('/author', authors.renderAuthor);
+    // Authors routes
+    app.get('/authors', catchAsync(authors.index));
+    app.post('/authors', catchAsync(authors.createAuthor));
+    app.get('/authors/new', authors.renderNewForm);
+    app.get('/authors/:id', catchAsync(authors.showAuthor));
+    app.put('/authors/:id', catchAsync(authors.updateAuthor));
+    app.delete('/authors/:id', catchAsync(authors.deleteAuthor));
+    app.get('/authors/:id/edit', catchAsync(authors.renderEditForm));
 
     // Books routes
     app.get('/books', catchAsync(books.index));
