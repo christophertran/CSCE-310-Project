@@ -48,7 +48,7 @@ module.exports = {
         const [newBook] = result.rows;
 
         // Redirect the user to the show page of their newly created book
-        return res.redirect(`books/${newBook.id}`);
+        return res.redirect(`/books/${newBook.id}`);
     },
 
     renderNewForm: (req, res) => res.render('books/new'),
