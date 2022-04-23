@@ -2,7 +2,7 @@ const db = require('../../db');
 
 module.exports = {
     index: async (req, res) => {
-        const result = await db.query('SELECT * FROM books LIMIT 20;');
+        const result = await db.queryAwait('SELECT * FROM books LIMIT 20;');
         return res.render('books/index', { books: result.rows });
     },
 
@@ -12,12 +12,12 @@ module.exports = {
         };
 
         // Search for the author based on first_name and last_name
-        let result = await db.query('SELECT * FROM authors WHERE UPPER(first_name)=$1 AND UPPER(last_name)=$2;', [book.author_first_name.toUpperCase(), book.author_last_name.toUpperCase()]);
+        let result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(first_name)=$1 AND UPPER(last_name)=$2;', [book.author_first_name.toUpperCase(), book.author_last_name.toUpperCase()]);
 
         // If the author doesn't already exist...
         if (result.rowCount === 0) {
             // Then create the author with the given first_name and last_name
-            result = await db.query('INSERT INTO authors(first_name, last_name, birth_date, website, bio) VALUES ($1, $2, $3, $4, $5);', [book.author_first_name, book.author_last_name, null, null, null]);
+            result = await db.queryAwait('INSERT INTO authors(first_name, last_name, birth_date, website, bio) VALUES ($1, $2, $3, $4, $5);', [book.author_first_name, book.author_last_name, null, null, null]);
 
             // If the insert didn't work properly, redirect the user back to /books/new route
             if (result.rowCount === 0) {
@@ -26,14 +26,14 @@ module.exports = {
             }
 
             // If the insert worked properly, then query for the newly created author
-            result = await db.query('SELECT * FROM authors WHERE UPPER(first_name)=$1 AND UPPER(last_name)=$2;', [book.author_first_name.toUpperCase(), book.author_last_name.toUpperCase()]);
+            result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(first_name)=$1 AND UPPER(last_name)=$2;', [book.author_first_name.toUpperCase(), book.author_last_name.toUpperCase()]);
         }
 
         // Get the author
         const [author] = result.rows;
 
         // Insert the book with the author_id field populated
-        result = await db.query('INSERT INTO books(author_id, title, description, isbn, cover_url, country, language, genre) VALUES ($1, $2, $3, $4, $5, $6, $7, $8);', [author.id, book.title, book.description, book.isbn, book.cover_url, book.country, book.language, book.genre]);
+        result = await db.queryAwait('INSERT INTO books(author_id, title, description, isbn, cover_url, country, language, genre) VALUES ($1, $2, $3, $4, $5, $6, $7, $8);', [author.id, book.title, book.description, book.isbn, book.cover_url, book.country, book.language, book.genre]);
 
         // If the insert didn't work properly, redirect the user back to /books/new route
         if (result.rowCount === 0) {
@@ -42,7 +42,7 @@ module.exports = {
         }
 
         // if the insert worked properly, then query for the newly created book
-        result = await db.query('SELECT id FROM books where UPPER(title) = $1;', [book.title.toUpperCase()]);
+        result = await db.queryAwait('SELECT id FROM books where UPPER(title) = $1;', [book.title.toUpperCase()]);
 
         // Get the new book
         const [newBook] = result.rows;
@@ -55,7 +55,7 @@ module.exports = {
 
     showBook: async (req, res) => {
         const { id } = req.params;
-        const result = await db.query('SELECT * FROM books where id = $1;', [id]);
+        const result = await db.queryAwait('SELECT * FROM books where id = $1;', [id]);
 
         if (result.rowCount === 0) {
             req.flash('error', "The book requested doesn't exist!");
@@ -66,7 +66,7 @@ module.exports = {
         return res.render('books/show', { book });
     },
 
-    updateBook: (req, res) => {
+    updateBook: async (req, res) => {
         const { id } = req.params;
         const book = {
             ...req.body,
@@ -98,11 +98,11 @@ module.exports = {
         res.redirect('books/new');
     },
 
-    deleteBook: (req, res) => res.sendStatus(403),
+    deleteBook: async (req, res) => res.sendStatus(403),
 
     renderEditForm: async (req, res) => {
         const { id } = req.params;
-        let result = await db.query('SELECT * FROM books where id = $1;', [id]);
+        let result = await db.queryAwait('SELECT * FROM books where id = $1;', [id]);
 
         if (result.rowCount === 0) {
             req.flash('error', "The book requested doesn't exist!");
@@ -110,7 +110,7 @@ module.exports = {
         }
 
         const [book] = result.rows;
-        result = await db.query('SELECT * FROM authors where id = $1;', [book.author_id]);
+        result = await db.queryAwait('SELECT * FROM authors where id = $1;', [book.author_id]);
 
         const [author] = result.rows;
         return res.render('books/edit', { book, author });

@@ -12,7 +12,7 @@ module.exports = {
         const saltRounds = 10;
         const hash = bcrypt.hashSync(password, saltRounds);
 
-        db.query('INSERT INTO users(username, password, type) VALUES ($1, $2, $3);', [username, hash, user], (err, result) => {
+        db.queryCallback('INSERT INTO users(username, password, type) VALUES ($1, $2, $3);', [username, hash, user], (err, result) => {
             if (err || result.rowCount !== 1) {
                 req.flash('error', `Error Registering User. Error Code: ${err.code}`);
                 return res.redirect('/register');

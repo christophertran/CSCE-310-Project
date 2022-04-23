@@ -18,5 +18,6 @@ pool.on('error', (err) => {
 
 module.exports = {
     pool,
-    query: (text, params) => pool.query(text, params),
+    queryAwait: (text, params) => pool.query(text, params),
+    queryCallback: (text, params, callback) => pool.query(text, params, callback),
 };

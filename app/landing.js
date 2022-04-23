@@ -6,7 +6,7 @@ function getRandNum(min, max) {
 
 module.exports = {
     renderLanding: async (req, res) => {
-        let result = await db.query('SELECT COUNT (*) FROM books;', []);
+        let result = await db.queryAwait('SELECT COUNT (*) FROM books;', []);
 
         if (result.rowCount === 0) {
             req.flash('error', 'Error fetching book count.');
@@ -21,7 +21,7 @@ module.exports = {
             getRandNum(0, max),
         ];
 
-        result = await db.query('SELECT * FROM books WHERE id IN ($1, $2, $3, $4);', [ids[0], ids[1], ids[2], ids[3]]);
+        result = await db.queryAwait('SELECT * FROM books WHERE id IN ($1, $2, $3, $4);', [ids[0], ids[1], ids[2], ids[3]]);
         return res.render('landing', { books: result.rows });
     },
 };

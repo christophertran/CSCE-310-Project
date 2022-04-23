@@ -1,4 +1,5 @@
 const { isLoggedIn, requiresLogin } = require('./middlewares/authorization');
+const catchAsync = require('./utils/catchAsync');
 const authors = require('../app/authors');
 const books = require('../app/books');
 const clubs = require('../app/clubs');
@@ -15,7 +16,7 @@ module.exports = (app, passport) => {
         next();
     });
 
-    app.get('/', landing.renderLanding);
+    app.get('/', catchAsync(landing.renderLanding));
 
     app.get('/register', isLoggedIn, users.renderRegister);
     app.post('/register', users.register);
@@ -28,13 +29,13 @@ module.exports = (app, passport) => {
     app.get('/author', authors.renderAuthor);
 
     // Books routes
-    app.get('/books', books.index);
-    app.post('/books', books.createBook);
+    app.get('/books', catchAsync(books.index));
+    app.post('/books', catchAsync(books.createBook));
     app.get('/books/new', books.renderNewForm);
-    app.get('/books/:id', books.showBook);
-    app.put('/books/:id', books.updateBook);
-    app.delete('/books/:id', books.deleteBook);
-    app.get('/books/:id/edit', books.renderEditForm);
+    app.get('/books/:id', catchAsync(books.showBook));
+    app.put('/books/:id', catchAsync(books.updateBook));
+    app.delete('/books/:id', catchAsync(books.deleteBook));
+    app.get('/books/:id/edit', catchAsync(books.renderEditForm));
 
     app.get('/clubs', clubs.renderClub);
 
