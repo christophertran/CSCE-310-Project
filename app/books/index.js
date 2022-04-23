@@ -48,6 +48,7 @@ module.exports = {
         const [newBook] = result.rows;
 
         // Redirect the user to the show page of their newly created book
+        req.flash('success', 'Successfully created book!');
         return res.redirect(`/books/${newBook.id}`);
     },
 
@@ -109,10 +110,23 @@ module.exports = {
         const [updatedBook] = result.rows;
 
         // Redirect the user to the show page of their updated book
+        req.flash('success', 'Successfully updated book!');
         return res.redirect(`/books/${updatedBook.id}`);
     },
 
-    deleteBook: async (req, res) => res.sendStatus(403),
+    deleteBook: async (req, res) => {
+        const { id } = req.params;
+
+        const result = await db.queryAwait('DELETE FROM books WHERE id=$1', [id]);
+
+        if (result.rowCount === 0) {
+            req.flash('error', 'Error deleting book!');
+            return res.redirect(`/books/${id}/edit`);
+        }
+
+        req.flash('success', 'Successfully deleted book!');
+        return res.redirect('/books');
+    },
 
     renderEditForm: async (req, res) => {
         const { id } = req.params;
