@@ -18,7 +18,17 @@
             <h5 class="card-title">
                 <%= author['first_name'] %> <%= author['last_name'] %>
             </h5>
-            <p class="card-text"><%= author['bio'] %></p>
+        </div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Birth Date: </strong><%= new Date(author['birth_date']).toLocaleDateString("en-US") %></li>
+                <% if (author.website) { %>
+                <li class="list-group-item"><strong>Website: </strong><a href="<%= author.website %>"><%= author.website %></a></li>
+                <% } %>
+                <li class="list-group-item"><strong>Bio: </strong><%= author['bio'] %></li>
+            </ul>
+        </div>
+        <div class="card-body">
             <a href="/authors/<%= author['id'] %>/edit" class="btn btn-success">Edit Author</a>
         </div>
     </div>
