@@ -15,7 +15,7 @@
     <!-- Add HTML body here. -->
     <div class="container">
         <h1 class="text-center">Edit Book</h1>
-        <form action="/books/<%=book.id%>?_method=PUT" method="POST">
+        <form action="/books/<%= book.id %>?_method=PUT" method="POST">
             <div class="mb-3">
                 <label class="form-label" for="title">Title</label>
                 <input class="form-control" type="text" id="title" name="title" value="<%= book['title'] %>" required>
