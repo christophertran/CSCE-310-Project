@@ -5,33 +5,23 @@ function getRandNum(min, max) {
 }
 
 module.exports = {
-    renderLanding: (req, res) => {
-        db.query('SELECT COUNT (*) FROM books;', (err1, result1) => {
-            if (err1) {
-                req.flash('error', `Error fetching book count. Error Code: ${err1.code}`);
-            }
+    renderLanding: async (req, res) => {
+        let result = await db.query('SELECT COUNT (*) FROM books;', []);
 
-            const max = result1.rows[0].count;
-            const ids = [
-                getRandNum(0, max),
-                getRandNum(0, max),
-                getRandNum(0, max),
-                getRandNum(0, max),
-            ];
+        if (result.rowCount === 0) {
+            req.flash('error', 'Error fetching book count.');
+            res.redirect('/');
+        }
 
-            db.query(
-                'SELECT * FROM books WHERE id IN ($1, $2, $3, $4);',
-                [ids[0], ids[1], ids[2], ids[3]],
-                (err2, result2) => {
-                    if (err2) {
-                        req.flash('error', `Error fetching books. Error Code: ${err2.code}`);
-                    }
+        const max = result.rows[0].count;
+        const ids = [
+            getRandNum(0, max),
+            getRandNum(0, max),
+            getRandNum(0, max),
+            getRandNum(0, max),
+        ];
 
-                    // Debugging tool: return res.json(result);
-
-                    return res.render('landing', { books: result2.rows });
-                },
-            );
-        });
+        result = await db.query('SELECT * FROM books WHERE id IN ($1, $2, $3, $4);', [ids[0], ids[1], ids[2], ids[3]]);
+        return res.render('landing', { books: result.rows });
     },
 };

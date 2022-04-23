@@ -9,3 +9,8 @@ body {
 	justify-content: start;
 	align-items: center;
 }
+
+.disabled {
+    pointer-events: none;
+    color: grey;
+}

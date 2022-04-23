@@ -22,8 +22,13 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label" for="author">Author</label>
-                <input class="form-control" type="text" id="author" name="author" value="<%= author['first_name'] %><%= author['last_name'] %>" required>
+                <label class="form-label" for="author_first_name">Author First Name</label>
+                <input class="form-control" type="text" id="author_first_name" name="author_first_name" value="<%= author['first_name'] %>" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="author_last_name">Author Last Name</label>
+                <input class="form-control" type="text" id="author_last_name" name="author_last_name" value="<%= author['last_name'] %>" required>
             </div>
 
             <div class="mb-3">
@@ -32,8 +37,8 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label" for="cover">Cover</label>
-                <input class="form-control" type="text" id="cover" name="cover" value="<%= book['cover'] %>" required>
+                <label class="form-label" for="cover_url">Cover URL</label>
+                <input class="form-control" type="text" id="cover_url" name="cover_url" value="<%= book['cover_url'] %>" required>
             </div>
 
             <div class="mb-3">
