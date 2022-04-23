@@ -41,7 +41,7 @@ module.exports = {
             return res.redirect('/books/new');
         }
 
-        // if the insert worked properly, then query for the newly created book
+        // If the insert worked properly, then query for the newly created book
         result = await db.queryAwait('SELECT id FROM books where UPPER(title) = $1;', [book.title.toUpperCase()]);
 
         // Get the new book
@@ -72,30 +72,44 @@ module.exports = {
             ...req.body,
         };
 
-        /**
-        const book = {
-            title: 'potato',
-            author_first_name: 'potato',
-            author_last_name: 'potato',
-            publish_date: '2022-04-21',
-            isbn: '3',
-            cover: 'potato',
-            country: 'potato',
-            language: 'potato',
-            pages: '3',
-            genre: 'potato',
-            edition: 'potato',
-            description: 'potato'
-        }
-         */
-        // TODO: Code to update book into database here...
-        // Remove the console.log below and the comment above when complete
-        // The author field will be provided as a string and should be replaced
-        // with the primary key or id of the actual author given a query from the db...
-        // If the author doesn't exist then we create one by inserting them into the db...
-        console.log(id, book);
+        // Search for the author based on first_name and last_name
+        let result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(first_name)=$1 AND UPPER(last_name)=$2;', [book.author_first_name.toUpperCase(), book.author_last_name.toUpperCase()]);
 
-        res.redirect('books/new');
+        // If the author doesn't already exist...
+        if (result.rowCount === 0) {
+            // Then create the author with the given first_name and last_name
+            result = await db.queryAwait('INSERT INTO authors(first_name, last_name, birth_date, website, bio) VALUES ($1, $2, $3, $4, $5);', [book.author_first_name, book.author_last_name, null, null, null]);
+
+            // If the insert didn't work properly, redirect the user back to /books/new route
+            if (result.rowCount === 0) {
+                req.flash('error', 'Error inserting author!');
+                return res.redirect('/books/new');
+            }
+
+            // If the insert worked properly, then query for the newly created author
+            result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(first_name)=$1 AND UPPER(last_name)=$2;', [book.author_first_name.toUpperCase(), book.author_last_name.toUpperCase()]);
+        }
+
+        // Get the author
+        const [author] = result.rows;
+
+        // Update the book with the author_id field populated
+        result = await db.queryAwait('UPDATE books SET author_id=$1, title=$2, description=$3, isbn=$4, cover_url=$5, country=$6, language=$7, genre=$8 WHERE id=$9;', [author.id, book.title, book.description, book.isbn, book.cover_url, book.country, book.language, book.genre, id]);
+
+        // If the update didn't work properly, redirect the user back to /books/new route
+        if (result.rowCount === 0) {
+            req.flash('error', 'Error updating book!');
+            return res.redirect('/books/new');
+        }
+
+        // If the update worked properly, then query for the newly created book
+        result = await db.queryAwait('SELECT id FROM books where UPPER(title) = $1;', [book.title.toUpperCase()]);
+
+        // Get the updated book
+        const [updatedBook] = result.rows;
+
+        // Redirect the user to the show page of their updated book
+        return res.redirect(`/books/${updatedBook.id}`);
     },
 
     deleteBook: async (req, res) => res.sendStatus(403),

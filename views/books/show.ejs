@@ -14,14 +14,15 @@
 
     <!-- Add HTML body here. -->
     <div class="show-container">
-        <div class="book--container">
-            <img class="card-img-top" src="<%= book['cover_url'] %>" alt="<%= book['title'] %>">
-        </div>
         <div class="card-body">
+            <div class="book-cover-container">
+                <img class="card-img-top" src="<%= book['cover_url'] %>" alt="<%= book['title'] %>">
+            </div>
             <h5 class="card-title">
                 <%= book['title'] %>
             </h5>
             <p class="card-text"><%= book['description'] %></p>
+            <a href="/books/<%= book['id'] %>/edit" class="btn btn-success">Edit Book</a>
         </div>
     </div>
 

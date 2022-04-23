@@ -38,34 +38,39 @@
 
             <div class="mb-3">
                 <label class="form-label" for="cover_url">Cover URL</label>
-                <input class="form-control" type="text" id="cover_url" name="cover_url" value="<%= book['cover_url'] %>" required>
+                <input class="form-control" type="text" id="cover_url" name="cover_url" value="<%= book['cover_url'] %>">
             </div>
 
             <div class="mb-3">
                 <label class="form-label" for="country">Country</label>
-                <input class="form-control" type="text" id="country" name="country" value="<%= book['country'] %>" required>
+                <input class="form-control" type="text" id="country" name="country" value="<%= book['country'] %>">
             </div>
 
             <div class="mb-3">
                 <label class="form-label" for="language">Language</label>
-                <input class="form-control" type="text" id="language" name="language" value="<%= book['language'] %>" required>
+                <input class="form-control" type="text" id="language" name="language" value="<%= book['language'] %>">
             </div>
 
             <div class="mb-3">
                 <label class="form-label" for="genre">Genre</label>
-                <input class="form-control" type="text" id="genre" name="genre" value="<%= book['genre'] %>" required>
+                <input class="form-control" type="text" id="genre" name="genre" value="<%= book['genre'] %>">
             </div>
 
             <div class="mb-3">
                 <label class="form-label" for="description">Description</label>
-                <textarea class="form-control" type="text" id="description" name="description" required><%= book['description'] %></textarea>
+                <textarea class="form-control" type="text" id="description" name="description"><%= book['description'] %></textarea>
             </div>
 
             <div class="mb-3">
-                <button class="btn btn-success">Add Book</button>
+                <button class="btn btn-success">Edit Book</button>
             </div>
         </form>
-        <a href="/books">All Books</a>
+
+        <form action="/books/<%=book.id%>?_method=DELETE" method="POST">
+            <div class="mb-3">
+                <button class="btn btn-danger">Delete Book</button>
+            </div>
+        </form>
     </div>
 
     <%- include("../partials/footer") %>
