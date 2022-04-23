@@ -94,8 +94,6 @@ module.exports = {
         // Get the author
         const [author] = result.rows;
 
-        // TODO: Fix the time format issue, it breaks when you insert the DATE 
-        // that gets returned. We need to format it before UPDATE for both this and authors
         // Update the book with the author_id field populated
         result = await db.queryAwait('UPDATE books SET author_id=$1, title=$2, description=$3, isbn=$4, cover_url=$5, country=$6, language=$7, genre=$8 WHERE id=$9;', [author.id, book.title, book.description, book.isbn, book.cover_url, book.country, book.language, book.genre, id]);
 

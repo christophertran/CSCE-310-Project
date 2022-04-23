@@ -126,7 +126,8 @@ module.exports = {
         }
 
         // Render the edit form
-        const [author] = result.rows;
+        let [author] = result.rows;
+        author.birth_date = new Date(author.birth_date).toISOString().split('T')[0];
         return res.render('authors/edit', { author });
     },
 };
