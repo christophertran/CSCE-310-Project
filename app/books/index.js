@@ -73,8 +73,16 @@ module.exports = {
             ...req.body,
         };
 
+        let result = await db.queryAwait('SELECT * FROM books WHERE UPPER(title)=$1 AND isbn=$2', [book.title.toUpperCase(), book.isbn]);
+
+        // If the book already exists, redirect the user back to /books/new
+        if (result.rowCount !== 0) {
+            req.flash('error', 'Book already exists!');
+            return res.redirect('/books/new');
+        }
+
         // Search for the author based on first_name and last_name
-        let result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(first_name)=$1 AND UPPER(last_name)=$2;', [book.author_first_name.toUpperCase(), book.author_last_name.toUpperCase()]);
+        result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(first_name)=$1 AND UPPER(last_name)=$2;', [book.author_first_name.toUpperCase(), book.author_last_name.toUpperCase()]);
 
         // If the author doesn't already exist...
         if (result.rowCount === 0) {
@@ -93,6 +101,11 @@ module.exports = {
 
         // Get the author
         const [author] = result.rows;
+
+        // FIXME: You can change the title and isbn of the book to a non
+        // unique combination it's not really important to fix that right now though...
+        // As long as when creating the book the title and isbn is unique
+        // is good enough.
 
         // Update the book with the author_id field populated
         result = await db.queryAwait('UPDATE books SET author_id=$1, title=$2, description=$3, isbn=$4, cover_url=$5, country=$6, language=$7, genre=$8 WHERE id=$9;', [author.id, book.title, book.description, book.isbn, book.cover_url, book.country, book.language, book.genre, id]);

@@ -1,0 +1,38 @@
+.container {
+	width: 60%;
+}
+
+.collection {
+	width: 60%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.collection>* {
+	margin: 5px 0;
+}
+
+.list-group {
+	width: 100%;
+}
+
+.show-container {
+	width: 60%;
+	padding: 20px;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+
+	background-color: #fff;
+	background-clip: border-box;
+	border: 1px solid rgba(0, 0, 0, .125);
+	border-radius: 0.25rem;
+}
+
+.show-container>* {
+	margin: 5px 0;
+}

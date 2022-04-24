@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../partials/header") %>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="/stylesheets/clubs.css" />
+</head>
+
+<body>
+    <%- include("../partials/flash") %>
+    <%- include("../partials/navbar") %>
+
+    <!-- Add HTML body here. -->
+    <div class="show-container">
+        <div class="card-body">
+            <h5 class="card-title">
+                <%= club['name'] %>
+            </h5>
+        </div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Description: </strong><%= club['description'] %></li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <a href="/clubs/<%= club['id'] %>/edit" class="btn btn-success">Edit Club</a>
+        </div>
+    </div>
+
+    <%- include("../partials/footer") %>
+</body>
+
+</html>

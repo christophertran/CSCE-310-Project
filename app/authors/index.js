@@ -73,6 +73,11 @@ module.exports = {
             return res.redirect('/authors');
         }
 
+        // FIXME: You can change the first_name and last_name of the author to a non
+        // unique combination it's not really important to fix that right now though...
+        // As long as when creating the author the first_name and last_name is unique
+        // is good enough.
+
         // If the author does exist, then update the author
         result = await db.queryAwait('UPDATE authors SET first_name=$1, last_name=$2, birth_date=$3, website=$4, bio=$5 WHERE id=$6;', [author.first_name, author.last_name, author.birth_date, author.website, author.bio, id]);
 
@@ -127,7 +132,11 @@ module.exports = {
 
         // Render the edit form
         let [author] = result.rows;
-        author.birth_date = new Date(author.birth_date).toISOString().split('T')[0];
+        author = {
+            ...author,
+            birth_date: new Date(author.birth_date).toISOString().split('T')[0],
+        };
+
         return res.render('authors/edit', { author });
     },
 };
