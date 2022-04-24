@@ -1,5 +1,19 @@
 const db = require('../../db');
 
+async function getMembers(id) {
+    let result = await db.queryAwait('SELECT user_id FROM book_club_members WHERE book_club_id=$1', [id]);
+
+    if (result.rowCount === 0) {
+        return result.rows;
+    }
+
+    const users = result.rows.map((row) => parseInt(row.user_id, 10));
+
+    result = await db.queryAwait(`SELECT id, username FROM users WHERE id IN (${users.join()})`, []);
+
+    return result.rows;
+}
+
 module.exports = {
     index: async (req, res) => {
         const result = await db.queryAwait('SELECT * FROM book_clubs;');
@@ -45,7 +59,7 @@ module.exports = {
         const { id } = req.params;
 
         // Look for club by id
-        const result = await db.queryAwait('SELECT * FROM book_clubs WHERE id=$1', [id]);
+        let result = await db.queryAwait('SELECT * FROM book_clubs WHERE id=$1', [id]);
 
         // If the book doesn't exist, redirect the user back to /clubs
         if (result.rowCount === 0) {
@@ -53,9 +67,19 @@ module.exports = {
             return res.redirect('/clubs');
         }
 
-        // Render the show page
         const [club] = result.rows;
-        return res.render('clubs/show', { club });
+        const members = await getMembers(id);
+
+        if (req.user) {
+            result = await db.queryAwait('SELECT * FROM book_club_members WHERE user_id=$1 AND book_club_id=$2', [req.user.id, id]);
+
+            if (result.rowCount !== 0) {
+                return res.render('clubs/show', { club, members, isMember: true });
+            }
+        }
+
+        // Render the show page
+        return res.render('clubs/show', { club, members, isMember: false });
     },
 
     updateClub: async (req, res) => {
@@ -124,7 +148,7 @@ module.exports = {
         // Look for club by id
         const result = await db.queryAwait('SELECT * FROM book_clubs WHERE id=$1', [id]);
 
-        // If the book doesn't exist, redirect the user back to /clubs
+        // If the club doesn't exist, redirect the user back to /clubs
         if (result.rowCount === 0) {
             req.flash('error', "The club requested doesn't exist!");
             return res.redirect('/clubs');
@@ -139,34 +163,82 @@ module.exports = {
         const { id } = req.params;
 
         // Look for club by id
-        let result = await db.queryAwait('SELECT * FROM book_clubs WHERE id=$1', [id]);
+        const result = await db.queryAwait('SELECT * FROM book_clubs WHERE id=$1', [id]);
 
-        // If the book doesn't exist, redirect the user back to /clubs
+        // If the club doesn't exist, redirect the user back to /clubs
         if (result.rowCount === 0) {
             req.flash('error', "The club requested doesn't exist!");
             return res.redirect('/clubs');
         }
 
-        result = await db.queryAwait('SELECT user_id FROM book_club_members WHERE book_club_id=$1', [id]);
-
-        if (result.rowCount === 0) {
-            return res.json(result.rows);
-        }
-
-        const users = result.rows.map((row) => parseInt(row.user_id, 10));
-
-        result = await db.queryAwait(`SELECT id, username FROM users WHERE id IN (${users.join()})`, []);
-
-        return res.json(result.rows);
+        return res.json(await getMembers(id));
     },
 
     addMember: async (req, res) => {
-        const { id, userid } = req.params;
-        return res.json(id, userid);
+        const { id } = req.params;
+
+        // Look for club by id
+        let result = await db.queryAwait('SELECT * FROM book_clubs WHERE id=$1', [id]);
+
+        // If the club doesn't exist, redirect the user back to /clubs
+        if (result.rowCount === 0) {
+            req.flash('error', "The club requested doesn't exist!");
+            return res.redirect('/clubs');
+        }
+
+        // If the club does exist, then check if the current user is already a member
+        result = await db.queryAwait('SELECT * FROM book_club_members WHERE user_id=$1 AND book_club_id=$2', [req.user.id, id]);
+
+        // If the user is already a member, redirect the user back to /clubs/:id
+        if (result.rowCount !== 0) {
+            req.flash('error', "You're already a member of this club!");
+            return res.redirect(`/clubs/${id}`);
+        }
+
+        // If the user isn't already a member, then insert them
+        result = await db.queryAwait('INSERT INTO book_club_members(user_id, book_club_id) VALUES($1, $2)', [req.user.id, id]);
+
+        // If the insert failed, redirect the user back to /clubs/:id
+        if (result.rowCount === 0) {
+            req.flash('error', 'Error inserting member into club!');
+            return res.redirect(`/clubs/${id}`);
+        }
+
+        req.flash('success', 'Successfully added member into club!');
+        return res.redirect(`/clubs/${id}`);
     },
 
     removeMember: async (req, res) => {
-        const { id, userid } = req.params;
-        return res.json(id, userid);
+        const { id } = req.params;
+
+        // Look for club by id
+        let result = await db.queryAwait('SELECT * FROM book_clubs WHERE id=$1', [id]);
+
+        // If the club doesn't exist, redirect the user back to /clubs
+        if (result.rowCount === 0) {
+            req.flash('error', "The club requested doesn't exist!");
+            return res.redirect('/clubs');
+        }
+
+        // If the club does exist, then check if the current user is already a member
+        result = await db.queryAwait('SELECT * FROM book_club_members WHERE user_id=$1 AND book_club_id=$2', [req.user.id, id]);
+
+        // If the user is not a member, redirect the user back to /clubs/:id
+        if (result.rowCount === 0) {
+            req.flash('error', "You're not a member of this club!");
+            return res.redirect(`/clubs/${id}`);
+        }
+
+        // If the user is a member, then delete them
+        result = await db.queryAwait('DELETE FROM book_club_members WHERE user_id=$1 AND book_club_id=$2', [req.user.id, id]);
+
+        // If the delete failed, redirect the user back to /clubs/:id
+        if (result.rowCount === 0) {
+            req.flash('error', 'Error deleting member from club!');
+            return res.redirect(`/clubs/${id}`);
+        }
+
+        req.flash('success', 'Successfully deleted member from club!');
+        return res.redirect(`/clubs/${id}`);
     },
 };

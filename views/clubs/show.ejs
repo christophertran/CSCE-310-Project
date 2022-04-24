@@ -25,7 +25,31 @@
             </ul>
         </div>
         <div class="card-body">
+            <% if (currentUser && isMember) { %>
+            <form action="/clubs/<%= club.id %>/members?_method=DELETE" method="POST">
+                <button class="btn btn-danger">Leave Club</button>
+            </form>
+            <% } else if (currentUser) { %>
+            <form action="/clubs/<%= club.id %>/members" method="POST">
+                <button class="btn btn-warning">Join Club</button>
+            </form>
+            <% } %>
             <a href="/clubs/<%= club['id'] %>/edit" class="btn btn-success">Edit Club</a>
+        </div>
+    </div>
+
+    <div class="show-container">
+        <div class="card-body">
+            <h5>Club Members:</h5>
+        </div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <% for(var i=0; i<members.length; i++) {%>
+                <li class="list-group-item">
+                    <a href="/users/<%= members[i]['id'] %>"><%= members[i]['username'] %></a>
+                </li>
+                <% } %>
+            </ul>
         </div>
     </div>
 
