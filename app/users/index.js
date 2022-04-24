@@ -2,8 +2,6 @@ const bcrypt = require('bcryptjs');
 const db = require('../../db');
 
 module.exports = {
-    renderUser: (req, res) => res.render('users/user'),
-
     renderRegister: (req, res) => res.render('register'),
 
     register: (req, res) => {
@@ -38,5 +36,69 @@ module.exports = {
         req.logout();
         req.flash('success', 'Successfully logged out!');
         return res.redirect('/login');
+    },
+
+    showUser: async (req, res) => {
+        const { id } = req.params;
+
+        const result = await db.queryAwait('SELECT * FROM users WHERE id=$1', [id]);
+
+        if (result.rowCount === 0) {
+            req.flash('error', "The user requested doesn't exist!");
+            return res.redirect('/');
+        }
+
+        const [user] = result.rows;
+        return res.render('users/show', { user });
+    },
+
+    updateUser: async (req, res) => {
+        const { id } = req.params;
+        const user = {
+            ...req.body,
+        };
+
+        if (parseInt(req.user.id, 10) !== parseInt(id, 10)) {
+            req.flash('error', "You don't have permission to do that!");
+            return res.redirect('/');
+        }
+
+        let result = await db.queryAwait('SELECT * FROM users WHERE id=$1', [id]);
+
+        if (result.rowCount === 0) {
+            req.flash('error', "The user requested doesn't exist!");
+            return res.redirect('/');
+        }
+
+        result = await db.queryAwait('UPDATE public.users SET username=$1, email=$2, language=$3, country=$4, favorite_genre=$5 WHERE id=$6;', [user.username, user.email, user.language, user.country, user.favorite_genre, id]);
+
+        if (result.rowCount === 0) {
+            req.flash('error', 'Error updating user information!');
+            return res.redirect(`/users/${id}/edit`);
+        }
+
+        req.flash('success', 'Successfully updated user information!');
+        return res.redirect(`/users/${id}`);
+    },
+
+    deleteUser: (req, res) => res.sendStatus(403),
+
+    renderEditForm: async (req, res) => {
+        const { id } = req.params;
+
+        if (parseInt(req.user.id, 10) !== parseInt(id, 10)) {
+            req.flash('error', "You don't have permission to do that!");
+            return res.redirect('/');
+        }
+
+        const result = await db.queryAwait('SELECT * FROM users WHERE id=$1', [id]);
+
+        if (result.rowCount === 0) {
+            req.flash('error', "The user requested doesn't exist!");
+            return res.redirect('/');
+        }
+
+        const [user] = result.rows;
+        return res.render('users/edit', { user });
     },
 };

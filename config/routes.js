@@ -26,6 +26,12 @@ module.exports = (app, passport) => {
 
     app.get('/logout', requiresLogin, users.logout);
 
+    // Users routes
+    app.get('/users/:id', catchAsync(users.showUser));
+    app.put('/users/:id', requiresLogin, catchAsync(users.updateUser));
+    app.delete('/users/:id', requiresLogin, users.deleteUser);
+    app.get('/users/:id/edit', requiresLogin, catchAsync(users.renderEditForm));
+
     // Authors routes
     app.get('/authors', catchAsync(authors.index));
     app.post('/authors', catchAsync(authors.createAuthor));
@@ -61,8 +67,6 @@ module.exports = (app, passport) => {
     app.get('/events', events.renderEvent);
 
     app.get('/lists', lists.renderList);
-
-    app.get('/users', users.renderUser);
 
     app.get('*', (req, res) => {
         res.sendStatus(404);

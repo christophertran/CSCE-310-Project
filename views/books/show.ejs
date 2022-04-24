@@ -67,7 +67,7 @@
                 Rated: <%= review.rating %> stars
             </p>
             <p class="card-text">Review: <%= review.content %></p>
-            <% if (currentUser && parseInt(currentUser.id, 10) === review.user_id) { %>
+            <% if (currentUser && parseInt(currentUser.id, 10) === parseInt(review.user_id, 10)) { %>
             <form action="/books/<%= book.id %>/reviews/<%= review.id %>?_method=DELETE" method="POST">
                 <button class="btn btn-sm btn-danger">Delete Review</button>
             </form>

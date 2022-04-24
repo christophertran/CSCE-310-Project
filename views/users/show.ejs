@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../partials/header") %>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="/stylesheets/users.css" />
+</head>
+
+<body>
+    <%- include("../partials/flash") %>
+    <%- include("../partials/navbar") %>
+
+    <!-- Add HTML body here. -->
+    <div class="show-container">
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Username: </strong><%= user.username %></li>
+                <li class="list-group-item"><strong>Email: </strong><%= user.email %></li>
+                <li class="list-group-item"><strong>Language: </strong><%= user.language %></li>
+                <li class="list-group-item"><strong>Country: </strong><%= user.country %></li>
+                <li class="list-group-item"><strong>Favorite Genre: </strong><%= user.favorite_genre %></li>
+            </ul>
+        </div>
+
+        <% if (currentUser && parseInt(currentUser.id, 10) === parseInt(user.id, 10)) { %>
+        <div class="card-body">
+            <a href="/users/<%= user.id %>/edit" class="btn btn-success">Edit User</a>
+        </div>
+        <% } %>
+    </div>
+
+    <%- include("../partials/footer") %>
+</body>
+
+</html>
