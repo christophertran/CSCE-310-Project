@@ -43,6 +43,8 @@ module.exports = (app, passport) => {
     app.put('/books/:id', catchAsync(books.updateBook));
     app.delete('/books/:id', catchAsync(books.deleteBook));
     app.get('/books/:id/edit', catchAsync(books.renderEditForm));
+    app.post('/books/:id/reviews', requiresLogin, catchAsync(books.createReview));
+    app.delete('/books/:id/reviews/:reviewid', requiresLogin, catchAsync(books.deleteReview));
 
     // Clubs routes
     app.get('/clubs', catchAsync(clubs.index));
@@ -54,7 +56,7 @@ module.exports = (app, passport) => {
     app.get('/clubs/:id/edit', catchAsync(clubs.renderEditForm));
     app.get('/clubs/:id/members', catchAsync(clubs.getMembers));
     app.post('/clubs/:id/members', requiresLogin, catchAsync(clubs.addMember));
-    app.delete('/clubs/:id/members', requiresLogin, catchAsync(clubs.removeMember));
+    app.delete('/clubs/:id/members', requiresLogin, catchAsync(clubs.deleteMember));
 
     app.get('/events', events.renderEvent);
 

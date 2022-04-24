@@ -18,12 +18,12 @@
         <form action="/clubs/<%= club.id %>?_method=PUT" method="POST">
             <div class="mb-3">
                 <label class="form-label" for="name">Club Name</label>
-                <input class="form-control" type="text" id="name" name="name" value="<%= club['name'] %>" required>
+                <input class="form-control" type="text" id="name" name="name" value="<%= club.name %>" required>
             </div>
 
             <div class="mb-3">
                 <label class="form-label" for="description">Description</label>
-                <textarea class="form-control" type="text" id="description" name="description" required><%= club['description'] %></textarea>
+                <textarea class="form-control" type="text" id="description" name="description" required><%= club.description %></textarea>
             </div>
 
             <div class="mb-3">

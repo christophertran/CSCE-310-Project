@@ -208,7 +208,7 @@ module.exports = {
         return res.redirect(`/clubs/${id}`);
     },
 
-    removeMember: async (req, res) => {
+    deleteMember: async (req, res) => {
         const { id } = req.params;
 
         // Look for club by id

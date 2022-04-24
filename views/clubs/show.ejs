@@ -21,7 +21,7 @@
         </div>
         <div class="card-body">
             <ul class="list-group list-group-flush">
-                <li class="list-group-item"><strong>Description: </strong><%= club['description'] %></li>
+                <li class="list-group-item"><strong>Description: </strong><%= club.description %></li>
             </ul>
         </div>
         <div class="card-body">
@@ -44,9 +44,9 @@
         </div>
         <div class="card-body">
             <ul class="list-group list-group-flush">
-                <% for(var i=0; i<members.length; i++) {%>
+                <% for(let member of members) {%>
                 <li class="list-group-item">
-                    <a href="/users/<%= members[i]['id'] %>"><%= members[i]['username'] %></a>
+                    <a href="/users/<%= member.id %>"><%= member.username %></a>
                 </li>
                 <% } %>
             </ul>

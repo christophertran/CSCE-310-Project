@@ -27,8 +27,8 @@
             <div class="promobox">
                 <p>What will <i>we</i> discover today?</p>
                 <div class="imggrid">
-                    <% for(var i=0; i<books.length; i++) {%>
-                    <a href="/books/<%= books[i]['id'] %>"><img src="<%= books[i]['cover_url'] %>" alt="<%= books[i]['title'] %>" width="128" height="185"></a>
+                    <% for(let book of books) {%>
+                    <a href="/books/<%= book.id %>"><img src="<%= book.cover_url %>" alt="<%= book.title %>" width="128" height="185"></a>
                     <% } %>
                 </div>
             </div>

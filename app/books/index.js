@@ -42,7 +42,7 @@ module.exports = {
         }
 
         // If the insert worked properly, then query for the newly created book
-        result = await db.queryAwait('SELECT id FROM books where UPPER(title) = $1;', [book.title.toUpperCase()]);
+        result = await db.queryAwait('SELECT id FROM books WHERE UPPER(title)=$1;', [book.title.toUpperCase()]);
 
         // Get the new book
         const [newBook] = result.rows;
@@ -56,7 +56,8 @@ module.exports = {
 
     showBook: async (req, res) => {
         const { id } = req.params;
-        const result = await db.queryAwait('SELECT * FROM books where id = $1;', [id]);
+
+        let result = await db.queryAwait('SELECT * FROM books WHERE id=$1;', [id]);
 
         if (result.rowCount === 0) {
             req.flash('error', "The book requested doesn't exist!");
@@ -64,7 +65,12 @@ module.exports = {
         }
 
         const [book] = result.rows;
-        return res.render('books/show', { book });
+
+        result = await db.queryAwait('SELECT reviews.*, users.id, users.username FROM reviews INNER JOIN users ON reviews.user_id=users.id WHERE reviews.book_id=$1;', [id]);
+
+        const reviews = result.rows;
+
+        return res.render('books/show', { book, reviews });
     },
 
     updateBook: async (req, res) => {
@@ -73,7 +79,7 @@ module.exports = {
             ...req.body,
         };
 
-        let result = await db.queryAwait('SELECT * FROM books WHERE UPPER(title)=$1 AND isbn=$2', [book.title.toUpperCase(), book.isbn]);
+        let result = await db.queryAwait('SELECT * FROM books WHERE UPPER(title)=$1 AND isbn=$2;', [book.title.toUpperCase(), book.isbn]);
 
         // If the book already exists, redirect the user back to /books/new
         if (result.rowCount !== 0) {
@@ -117,7 +123,7 @@ module.exports = {
         }
 
         // If the update worked properly, then query for the newly created book
-        result = await db.queryAwait('SELECT id FROM books where UPPER(title) = $1;', [book.title.toUpperCase()]);
+        result = await db.queryAwait('SELECT id FROM books WHERE UPPER(title)=$1;', [book.title.toUpperCase()]);
 
         // Get the updated book
         const [updatedBook] = result.rows;
@@ -143,7 +149,7 @@ module.exports = {
 
     renderEditForm: async (req, res) => {
         const { id } = req.params;
-        let result = await db.queryAwait('SELECT * FROM books where id=$1;', [id]);
+        let result = await db.queryAwait('SELECT * FROM books WHERE id=$1;', [id]);
 
         if (result.rowCount === 0) {
             req.flash('error', "The book requested doesn't exist!");
@@ -151,9 +157,61 @@ module.exports = {
         }
 
         const [book] = result.rows;
-        result = await db.queryAwait('SELECT * FROM authors where id=$1;', [book.author_id]);
+        result = await db.queryAwait('SELECT * FROM authors WHERE id=$1;', [book.author_id]);
 
         const [author] = result.rows;
         return res.render('books/edit', { book, author });
+    },
+
+    createReview: async (req, res) => {
+        const { id } = req.params;
+        const review = {
+            ...req.body,
+        };
+
+        let result = await db.queryAwait('SELECT * FROM books WHERE id=$1;', [id]);
+
+        if (result.rowCount === 0) {
+            req.flash('error', "The book requested doesn't exist!");
+            return res.redirect('/books');
+        }
+
+        result = await db.queryAwait('INSERT INTO reviews(book_id, user_id, content, rating) VALUES ($1, $2, $3, $4);', [id, req.user.id, review.content, review.rating]);
+
+        if (result.rowCount === 0) {
+            req.flash('error', 'Error creating review!');
+            return res.redirect(`/books/${id}`);
+        }
+
+        req.flash('success', 'Successfully created review!');
+        return res.redirect(`/books/${id}`);
+    },
+
+    deleteReview: async (req, res) => {
+        const { id, reviewid } = req.params;
+
+        let result = await db.queryAwait('SELECT * FROM books WHERE id=$1;', [id]);
+
+        if (result.rowCount === 0) {
+            req.flash('error', "The book requested doesn't exist!");
+            return res.redirect('/books');
+        }
+
+        result = await db.queryAwait('SELECT * FROM reviews WHERE id=$1', [reviewid]);
+
+        if (result.rowCount === 0) {
+            req.flash('error', "The review requested doesn't exist!");
+            return res.redirect(`/books/${id}`);
+        }
+
+        result = await db.queryAwait('DELETE FROM reviews WHERE id=$1', [reviewid]);
+
+        if (result.rowCount === 0) {
+            req.flash('error', 'Error deleting review!');
+            return res.redirect(`/books/${id}`);
+        }
+
+        req.flash('success', 'Successfully deleted review!');
+        return res.redirect(`/books/${id}`);
     },
 };

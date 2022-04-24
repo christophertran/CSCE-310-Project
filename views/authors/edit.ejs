@@ -18,27 +18,27 @@
         <form action="/authors/<%= author.id %>?_method=PUT" method="POST">
             <div class="mb-3">
                 <label class="form-label" for="first_name">First Name</label>
-                <input class="form-control" type="text" id="first_name" name="first_name" value="<%= author['first_name'] %>" required>
+                <input class="form-control" type="text" id="first_name" name="first_name" value="<%= author.first_name %>" required>
             </div>
 
             <div class="mb-3">
                 <label class="form-label" for="last_name">Last Name</label>
-                <input class="form-control" type="text" id="last_name" name="last_name" value="<%= author['last_name'] %>" required>
+                <input class="form-control" type="text" id="last_name" name="last_name" value="<%= author.last_name %>" required>
             </div>
 
             <div class="mb-3">
                 <label class="form-label" for="birth_date">Birth Date</label>
-                <input class="form-control" type="date" id="birth_date" name="birth_date" value="<%= author['birth_date'] %>" required>
+                <input class="form-control" type="date" id="birth_date" name="birth_date" value="<%= author.birth_date %>" required>
             </div>
 
             <div class="mb-3">
                 <label class="form-label" for="website">Wesbite</label>
-                <input class="form-control" type="text" id="website" name="website" value="<%= author['website'] %>">
+                <input class="form-control" type="text" id="website" name="website" value="<%= author.website %>">
             </div>
 
             <div class="mb-3">
                 <label class="form-label" for="bio">Bio</label>
-                <textarea class="form-control" type="text" id="bio" name="bio"><%= author['bio'] %></textarea>
+                <textarea class="form-control" type="text" id="bio" name="bio"><%= author.bio %></textarea>
             </div>
 
             <div class="mb-3">

@@ -16,9 +16,9 @@
     <div class="collection">
         <a href="authors/new"><button class="btn btn-success">Add Author</button></a>
         <ul class="list-group">
-            <% for(var i=0; i<authors.length; i++) {%>
+            <% for(let author of authors) {%>
             <li class="list-group-item">
-                <a href="/authors/<%= authors[i]['id'] %>"><%= authors[i]['first_name'] %> <%= authors[i]['last_name'] %></a>
+                <a href="/authors/<%= author.id %>"><%= author.first_name %> <%= author.last_name %></a>
             </li>
             <% } %>
         </ul>

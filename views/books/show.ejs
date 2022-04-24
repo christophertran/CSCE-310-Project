@@ -6,6 +6,7 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="/stylesheets/books.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/stars.css" />
 </head>
 
 <body>
@@ -16,14 +17,63 @@
     <div class="show-container">
         <div class="card-body">
             <div class="book-cover-container">
-                <img class="card-img-top" src="<%= book['cover_url'] %>" alt="<%= book['title'] %>">
+                <img class="card-img-top" src="<%= book.cover_url %>" alt="<%= book.title %>">
             </div>
             <h5 class="card-title">
-                <%= book['title'] %>
+                <%= book.title %>
             </h5>
-            <p class="card-text"><%= book['description'] %></p>
-            <a href="/books/<%= book['id'] %>/edit" class="btn btn-success">Edit Book</a>
+            <p class="card-text"><%= book.description %></p>
+            <a href="/books/<%= book.id %>/edit" class="btn btn-success">Edit Book</a>
         </div>
+    </div>
+
+    <% if (currentUser) { %>
+    <div class="show-container">
+        <h5 class="card-title">Leave a Review</h5>
+        <div class="card-body">
+            <form action="/books/<%= book.id %>/reviews" method="POST" class="mb-3">
+                <fieldset class="starability-basic">
+                    <input type="radio" id="rate1" name="rating" value="1" checked />
+                    <label for="rate1" title="Terrible">1 star</label>
+                    <input type="radio" id="rate2" name="rating" value="2" />
+                    <label for="rate2" title="Not good">2 stars</label>
+                    <input type="radio" id="rate3" name="rating" value="3" />
+                    <label for="rate3" title="Average">3 stars</label>
+                    <input type="radio" id="rate4" name="rating" value="4" />
+                    <label for="rate4" title="Very good">4 stars</label>
+                    <input type="radio" id="rate5" name="rating" value="5" />
+                    <label for="rate5" title="Amazing">5 stars</label>
+                </fieldset>
+
+                <div class="mb-3">
+                    <label class="form-label" for="content">Review Text</label>
+                    <textarea class="form-control" name="content" id="content" cols="30" rows="3" required></textarea>
+                </div>
+
+                <button class="btn btn-success">Submit</button>
+            </form>
+        </div>
+    </div>
+    <% } %>
+
+    <div class="show-container">
+        <h5 class="card-title">Reviews</h5>
+        <% for(let review of reviews) {%>
+        <div class="card-body">
+            <div class="card-title">
+                <strong><%= review.username %></strong>
+            </div>
+            <p class="starability-result" data-rating="<%= review.rating %>">
+                Rated: <%= review.rating %> stars
+            </p>
+            <p class="card-text">Review: <%= review.content %></p>
+            <% if (currentUser && parseInt(currentUser.id, 10) === review.user_id) { %>
+            <form action="/books/<%= book.id %>/reviews/<%= review.id %>?_method=DELETE" method="POST">
+                <button class="btn btn-sm btn-danger">Delete Review</button>
+            </form>
+            <% } %>
+        </div>
+        <% } %>
     </div>
 
     <%- include("../partials/footer") %>

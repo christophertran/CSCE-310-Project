@@ -18,47 +18,47 @@
         <form action="/books/<%= book.id %>?_method=PUT" method="POST">
             <div class="mb-3">
                 <label class="form-label" for="title">Title</label>
-                <input class="form-control" type="text" id="title" name="title" value="<%= book['title'] %>" required>
+                <input class="form-control" type="text" id="title" name="title" value="<%= book.title %>" required>
             </div>
 
             <div class="mb-3">
                 <label class="form-label" for="author_first_name">Author First Name</label>
-                <input class="form-control" type="text" id="author_first_name" name="author_first_name" value="<%= author['first_name'] %>" required>
+                <input class="form-control" type="text" id="author_first_name" name="author_first_name" value="<%= author.first_name %>" required>
             </div>
 
             <div class="mb-3">
                 <label class="form-label" for="author_last_name">Author Last Name</label>
-                <input class="form-control" type="text" id="author_last_name" name="author_last_name" value="<%= author['last_name'] %>" required>
+                <input class="form-control" type="text" id="author_last_name" name="author_last_name" value="<%= author.last_name %>" required>
             </div>
 
             <div class="mb-3">
                 <label class="form-label" for="isbn">isbn</label>
-                <input class="form-control" type="text" id="isbn" name="isbn" value="<%= book['isbn'] %>" required>
+                <input class="form-control" type="text" id="isbn" name="isbn" value="<%= book.isbn %>" required>
             </div>
 
             <div class="mb-3">
                 <label class="form-label" for="cover_url">Cover URL</label>
-                <input class="form-control" type="text" id="cover_url" name="cover_url" value="<%= book['cover_url'] %>">
+                <input class="form-control" type="text" id="cover_url" name="cover_url" value="<%= book.cover_url %>">
             </div>
 
             <div class="mb-3">
                 <label class="form-label" for="country">Country</label>
-                <input class="form-control" type="text" id="country" name="country" value="<%= book['country'] %>">
+                <input class="form-control" type="text" id="country" name="country" value="<%= book.country %>">
             </div>
 
             <div class="mb-3">
                 <label class="form-label" for="language">Language</label>
-                <input class="form-control" type="text" id="language" name="language" value="<%= book['language'] %>">
+                <input class="form-control" type="text" id="language" name="language" value="<%= book.language %>">
             </div>
 
             <div class="mb-3">
                 <label class="form-label" for="genre">Genre</label>
-                <input class="form-control" type="text" id="genre" name="genre" value="<%= book['genre'] %>">
+                <input class="form-control" type="text" id="genre" name="genre" value="<%= book.genre %>">
             </div>
 
             <div class="mb-3">
                 <label class="form-label" for="description">Description</label>
-                <textarea class="form-control" type="text" id="description" name="description"><%= book['description'] %></textarea>
+                <textarea class="form-control" type="text" id="description" name="description"><%= book.description %></textarea>
             </div>
 
             <div class="mb-3">
