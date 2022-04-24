@@ -134,4 +134,39 @@ module.exports = {
         const [club] = result.rows;
         return res.render('clubs/edit', { club });
     },
+
+    getMembers: async (req, res) => {
+        const { id } = req.params;
+
+        // Look for club by id
+        let result = await db.queryAwait('SELECT * FROM book_clubs WHERE id=$1', [id]);
+
+        // If the book doesn't exist, redirect the user back to /clubs
+        if (result.rowCount === 0) {
+            req.flash('error', "The club requested doesn't exist!");
+            return res.redirect('/clubs');
+        }
+
+        result = await db.queryAwait('SELECT user_id FROM book_club_members WHERE book_club_id=$1', [id]);
+
+        if (result.rowCount === 0) {
+            return res.json(result.rows);
+        }
+
+        const users = result.rows.map((row) => parseInt(row.user_id, 10));
+
+        result = await db.queryAwait(`SELECT id, username FROM users WHERE id IN (${users.join()})`, []);
+
+        return res.json(result.rows);
+    },
+
+    addMember: async (req, res) => {
+        const { id, userid } = req.params;
+        return res.json(id, userid);
+    },
+
+    removeMember: async (req, res) => {
+        const { id, userid } = req.params;
+        return res.json(id, userid);
+    },
 };

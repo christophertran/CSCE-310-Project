@@ -7,7 +7,7 @@ Original skeleton code from [here](https://github.com/DayOnePl/dos-server) and m
 1. Clone the repo from [here](https://github.com/christophertran/CSCE-310-Project.git).
 1. Go into the repo, once in the repo, run `npm i` to install all the `package.json` dependencies.
 1. After installing, a `node_modules` folder should appear.
-1. To run the node server, run `npm startDev`.
+1. To run the node server for development, run `npx nodemon server.js`.
 
 ## Before submitting a commit
 1. Ensure that you lint the files so that we keep some form of formatting consistency.
