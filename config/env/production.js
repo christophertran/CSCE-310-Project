@@ -8,5 +8,5 @@ module.exports = {
         max: process.env.DB_MAX_CONNECTIONS,
         idleTimeoutMillis: process.env.DB_IDLE_TIMEOUT,
     },
-    session_secret: '',
+    session_secret: process.env.SECRET,
 };

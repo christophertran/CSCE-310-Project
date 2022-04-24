@@ -1,8 +1,9 @@
 .DS_Store
 .idea
 
-.env
+/*.env
 node_modules/
+npm-debug.log
 
 .monitor
 Makefile
