@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../partials/header") %>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="/stylesheets/clubs.css" />
+</head>
+
+<body>
+    <%- include("../partials/navbar") %>
+    <%- include("../partials/flash") %>
+
+    <!-- Add HTML body here. -->
+    <div class="collection">
+        <% if (currentUser) { %>
+        <a href="clubs/new"><button class="btn btn-success">Add Club</button></a>         
+        <% } %>
+        <ul class="list-group">
+            <% for(let club of clubs) {%>
+            <li class="list-group-item">
+                <a href="/clubs/<%= club.id %>"><%= club.name %></a>
+            </li>
+            <% } %>
+        </ul>
+    </div>
+
+    <%- include("../partials/footer") %>
+</body>
+
+</html>

@@ -64,7 +64,14 @@ module.exports = (app, passport) => {
     app.post('/clubs/:id/members', requiresLogin, catchAsync(clubs.addMember));
     app.delete('/clubs/:id/members', requiresLogin, catchAsync(clubs.deleteMember));
 
-    app.get('/events', events.renderEvent);
+    // events routes
+    app.get('/events', catchAsync(events.index));
+    app.post('/events', requiresLogin, catchAsync(events.createEvent));
+    app.get('/events/new', requiresLogin, events.renderNewForm);
+    app.get('/events/:id', catchAsync(event.showEvent));
+    app.put('/events/:id', requiresLogin, catchAsync(events.updateEvent));
+    app.delete('/events/:id', requiresLogin, catchAsync(events.deleteEvent));
+    app.get('/events/:id/edit', requiresLogin, catchAsync(events.renderEditForm));
 
     app.get('/lists', lists.renderList);
 
