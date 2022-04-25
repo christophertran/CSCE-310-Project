@@ -68,7 +68,7 @@ module.exports = (app, passport) => {
     app.get('/events', catchAsync(events.index));
     app.post('/events', requiresLogin, catchAsync(events.createEvent));
     app.get('/events/new', requiresLogin, events.renderNewForm);
-    app.get('/events/:id', catchAsync(event.showEvent));
+    app.get('/events/:id', catchAsync(events.showEvent));
     app.put('/events/:id', requiresLogin, catchAsync(events.updateEvent));
     app.delete('/events/:id', requiresLogin, catchAsync(events.deleteEvent));
     app.get('/events/:id/edit', requiresLogin, catchAsync(events.renderEditForm));
