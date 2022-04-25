@@ -2,6 +2,8 @@
 
 Original skeleton code from [here](https://github.com/DayOnePl/dos-server) and modified to work with Node v16. The original article with additional explanation can be found [here](https://reallifeprogramming.com/node-authentication-with-passport-postgres-ef93e2d520e7).
 
+## [Heroku Link](https://good-books-310.herokuapp.com/)
+
 ## Getting started
 1. Ensure you have node v16 installed. Instructions can be found [here](https://nodejs.org/en/download/).
 1. Clone the repo from [here](https://github.com/christophertran/CSCE-310-Project.git).
