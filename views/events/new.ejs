@@ -5,7 +5,7 @@
     <%- include("../partials/header") %>
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="/stylesheets/clubs.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/events.css" />
 </head>
 
 <body>
@@ -14,10 +14,10 @@
 
     <!-- Add HTML body here. -->
     <div class="container">
-        <h1 class="text-center">New Club</h1>
-        <form action="/clubs" method="POST">
+        <h1 class="text-center">New Event</h1>
+        <form action="/events" method="POST">
             <div class="mb-3">
-                <label class="form-label" for="name">Club Name</label>
+                <label class="form-label" for="name">Event Name</label>
                 <input class="form-control" type="text" id="name" name="name" required>
             </div>
 
@@ -27,7 +27,17 @@
             </div>
 
             <div class="mb-3">
-                <button class="btn btn-success">Add Club</button>
+                <label class="form-label" for="description">Date</label>
+                <textarea class="form-control" type="date" id="date" name="date" required></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="description">Category</label>
+                <textarea class="form-control" type="text" id="category" name="category" required></textarea>
+            </div>
+
+            <div class="mb-3">
+                <button class="btn btn-success">Add Event</button>
             </div>
         </form>
     </div>

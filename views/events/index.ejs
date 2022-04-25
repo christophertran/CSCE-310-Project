@@ -5,7 +5,7 @@
     <%- include("../partials/header") %>
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="/stylesheets/clubs.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/events.css" />
 </head>
 
 <body>
@@ -15,12 +15,12 @@
     <!-- Add HTML body here. -->
     <div class="collection">
         <% if (currentUser) { %>
-        <a href="clubs/new"><button class="btn btn-success">Add Club</button></a>         
+        <a href="events/new"><button class="btn btn-success">Add Event</button></a>
         <% } %>
         <ul class="list-group">
-            <% for(let club of clubs) {%>
+            <% for(let event of events) {%>
             <li class="list-group-item">
-                <a href="/clubs/<%= club.id %>"><%= club.name %></a>
+                <a href="/events/<%= event.id %>"><%= event.name %></a>
             </li>
             <% } %>
         </ul>
