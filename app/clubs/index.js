@@ -35,7 +35,7 @@ module.exports = {
         }
 
         // If the club doesn't already exist, then we insert the new club
-        result = await db.queryAwait('INSERT INTO book_clubs(name, description) VALUES ($1, $2);', [club.name, club.description]);
+        result = await db.queryAwait('INSERT INTO book_clubs(name, description, user_id) VALUES ($1, $2, $3);', [club.name, club.description, req.user.id]);
 
         // If the insert isn't successful, redirect the user back to /clubs/new
         if (result.rowCount === 0) {

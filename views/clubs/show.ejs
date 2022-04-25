@@ -34,8 +34,13 @@
                 <button class="btn btn-warning">Join Club</button>
             </form>
             <% } %>
+        </div>
+
+        <% if (currentUser && (currentUser.type === 'admin' || parseInt(currentUser.id, 10) === parseInt(club.user_id, 10))) { %>
+        <div class="card-body">
             <a href="/clubs/<%= club['id'] %>/edit" class="btn btn-success">Edit Club</a>
         </div>
+        <% } %>
     </div>
 
     <div class="show-container">

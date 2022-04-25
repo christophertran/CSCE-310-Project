@@ -23,7 +23,9 @@
                 <%= book.title %>
             </h5>
             <p class="card-text"><%= book.description %></p>
+            <% if (currentUser && (currentUser.type === 'admin' || parseInt(currentUser.id, 10) === parseInt(book.user_id, 10))) { %>
             <a href="/books/<%= book.id %>/edit" class="btn btn-success">Edit Book</a>
+            <% } %>
         </div>
     </div>
 
@@ -67,7 +69,7 @@
                 Rated: <%= review.rating %> stars
             </p>
             <p class="card-text">Review: <%= review.content %></p>
-            <% if (currentUser && parseInt(currentUser.id, 10) === parseInt(review.user_id, 10)) { %>
+            <% if (currentUser && (currentUser.type === 'admin' || parseInt(currentUser.id, 10) === parseInt(review.user_id, 10))) { %>
             <form action="/books/<%= book.id %>/reviews/<%= review.id %>?_method=DELETE" method="POST">
                 <button class="btn btn-sm btn-danger">Delete Review</button>
             </form>

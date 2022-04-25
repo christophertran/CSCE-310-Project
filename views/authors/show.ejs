@@ -28,9 +28,12 @@
                 <li class="list-group-item"><strong>Bio: </strong><%= author.bio %></li>
             </ul>
         </div>
+
+        <% if (currentUser && (currentUser.type === 'admin' || parseInt(currentUser.id, 10) === parseInt(author.user_id, 10))) { %>
         <div class="card-body">
             <a href="/authors/<%= author.id %>/edit" class="btn btn-success">Edit Author</a>
         </div>
+        <% } %>
     </div>
 
     <%- include("../partials/footer") %>

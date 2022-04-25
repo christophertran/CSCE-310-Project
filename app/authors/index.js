@@ -21,7 +21,7 @@ module.exports = {
         }
 
         // If the author doesn't already exist, then we insert the new author
-        result = await db.queryAwait('INSERT INTO authors(first_name, last_name, birth_date, website, bio) VALUES ($1, $2, $3, $4, $5);', [author.first_name, author.last_name, author.birth_date, author.website, author.bio]);
+        result = await db.queryAwait('INSERT INTO authors(first_name, last_name, birth_date, website, bio, user_id) VALUES ($1, $2, $3, $4, $5, $6);', [author.first_name, author.last_name, author.birth_date, author.website, author.bio, req.user.id]);
 
         // If the insert isn't successful, redirect the user back to /authors/new
         if (result.rowCount === 0) {

@@ -17,7 +17,7 @@ module.exports = {
         // If the author doesn't already exist...
         if (result.rowCount === 0) {
             // Then create the author with the given first_name and last_name
-            result = await db.queryAwait('INSERT INTO authors(first_name, last_name, birth_date, website, bio) VALUES ($1, $2, $3, $4, $5);', [book.author_first_name, book.author_last_name, null, null, null]);
+            result = await db.queryAwait('INSERT INTO authors(first_name, last_name, birth_date, website, bio, user_id) VALUES ($1, $2, $3, $4, $5, $6);', [book.author_first_name, book.author_last_name, null, null, null, req.user.id]);
 
             // If the insert didn't work properly, redirect the user back to /books/new route
             if (result.rowCount === 0) {
@@ -33,7 +33,7 @@ module.exports = {
         const [author] = result.rows;
 
         // Insert the book with the author_id field populated
-        result = await db.queryAwait('INSERT INTO books(author_id, title, description, isbn, cover_url, country, language, genre) VALUES ($1, $2, $3, $4, $5, $6, $7, $8);', [author.id, book.title, book.description, book.isbn, book.cover_url, book.country, book.language, book.genre]);
+        result = await db.queryAwait('INSERT INTO books(author_id, title, description, isbn, cover_url, country, language, genre, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);', [author.id, book.title, book.description, book.isbn, book.cover_url, book.country, book.language, book.genre, req.user.id]);
 
         // If the insert didn't work properly, redirect the user back to /books/new route
         if (result.rowCount === 0) {
@@ -66,7 +66,7 @@ module.exports = {
 
         const [book] = result.rows;
 
-        result = await db.queryAwait('SELECT reviews.*, users.id, users.username FROM reviews INNER JOIN users ON reviews.user_id=users.id WHERE reviews.book_id=$1;', [id]);
+        result = await db.queryAwait('SELECT reviews.*, users.username FROM reviews INNER JOIN users ON reviews.user_id=users.id WHERE reviews.book_id=$1;', [id]);
 
         const reviews = result.rows;
 
