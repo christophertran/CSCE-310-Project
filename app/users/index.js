@@ -16,7 +16,7 @@ module.exports = {
                 return res.redirect('/register');
             }
 
-            req.flash('success', `Successfully registered ${username}!`);
+            req.flash('success', `Successfully registered ${username}! Please login with your new credentials.`);
             return res.redirect('/login');
         });
     },
@@ -24,7 +24,7 @@ module.exports = {
     renderLogin: (req, res) => res.render('login'),
 
     login: (req, res) => {
-        req.flash('success', 'Welcome back!');
+        req.flash('success', 'Welcome!');
 
         const redirectUrl = req.session.returnTo || '/';
         delete req.session.returnTo;

@@ -11,10 +11,10 @@ module.exports = {
         const result = await db.queryAwait('SELECT * FROM events;');
         return res.render('events/index', { events: result.rows });
     },
-    
+
     // this function takes information from a form in the new event page and inserts it into the database
     createEvent: async (req, res) => {
-        const event = {...req.body,};
+        const event = { ...req.body };
 
         // Look for the event in the DB by name
         let result = await db.queryAwait('SELECT * FROM events WHERE UPPER(name)=$1;', [event.name.toUpperCase()]);
@@ -45,13 +45,13 @@ module.exports = {
     },
 
     renderNewForm: (req, res) => res.render('events/new'),
-    
+
     // this function gets data abouta specific event to the show events page
     showEvent: async (req, res) => {
         const { id } = req.params;
 
         // Look for Event by id
-        let result = await db.queryAwait('SELECT * FROM events WHERE id=$1', [id]);
+        const result = await db.queryAwait('SELECT * FROM events WHERE id=$1', [id]);
 
         // If the event doesn't exist, redirect the user back to /Events
         if (result.rowCount === 0) {
@@ -139,6 +139,4 @@ module.exports = {
         return res.render('events/edit', { event });
     },
 
-
 };
-
