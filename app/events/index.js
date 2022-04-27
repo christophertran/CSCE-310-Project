@@ -1,11 +1,18 @@
 const db = require('../../db');
 
+/*
+Jubey Garza created this file
+*/
+
 module.exports = {
+
+    // this is the function that give the event data to the even index page
     index: async (req, res) => {
         const result = await db.queryAwait('SELECT * FROM events;');
         return res.render('events/index', { events: result.rows });
     },
-
+    
+    // this function takes information from a form in the new event page and inserts it into the database
     createEvent: async (req, res) => {
         const event = {...req.body,};
 
@@ -39,6 +46,7 @@ module.exports = {
 
     renderNewForm: (req, res) => res.render('events/new'),
     
+    // this function gets data abouta specific event to the show events page
     showEvent: async (req, res) => {
         const { id } = req.params;
 
@@ -52,21 +60,11 @@ module.exports = {
         }
 
         const [event] = result.rows;
-        /*
-        const creator = await getCreator(id);
-
-        if (req.user.id == result.user_id) // should compare the id of hte creator in the events table with the current users id
-        {
-            return res.render('events/show', { club, members, isCreator: true });
-        }
-
-        // Render the show page
-        return res.render('events/show', { event, isCreator: false });
-        */
 
         return res.render('events/show', { event });
     },
 
+    // this function gets updates data for an event instance
     updateEvent: async (req, res) => {
         const { id } = req.params;
         const event = {
@@ -96,6 +94,7 @@ module.exports = {
         return res.redirect(`/events/${id}`);
     },
 
+    // this ducntion removes a specific event from the database
     deleteEvent: async (req, res) => {
         const { id } = req.params;
 
@@ -122,6 +121,7 @@ module.exports = {
         return res.redirect('/events');
     },
 
+    // this function gets data about a specific event for the edit page
     renderEditForm: async (req, res) => {
         const { id } = req.params;
 
