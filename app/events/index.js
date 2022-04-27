@@ -76,7 +76,7 @@ module.exports = {
         // Look for event by id
         let result = await db.queryAwait('SELECT * FROM events WHERE id=$1', [id]);
 
-        // If the book doesn't exist, redirect the user back to /events
+        // If the event doesn't exist, redirect the user back to /events
         if (result.rowCount === 0) {
             req.flash('error', "The event requested doesn't exist!");
             return res.redirect('/events');
@@ -102,14 +102,14 @@ module.exports = {
         // Look for event by id
         let result = await db.queryAwait('SELECT * FROM events WHERE id=$1', [id]);
 
-        // If the book doesn't exist, redirect the user back to /events
+        // If the event doesn't exist, redirect the user back to /events
         if (result.rowCount === 0) {
             req.flash('error', "The event requested doesn't exist!");
             return res.redirect('/events');
         }
 
         // If the event does exist, then delete the event
-        result = await db.queryAwait('DELETE FROM book_events WHERE id=$1', [id]);
+        result = await db.queryAwait('DELETE FROM events WHERE id=$1', [id]);
 
         // If the delete isn't successful, redirect the user back to /events/:id/edit
         if (result.rowCount === 0) {
@@ -126,7 +126,7 @@ module.exports = {
         const { id } = req.params;
 
         // Look for event by id
-        const result = await db.queryAwait('SELECT * FROM book_events WHERE id=$1', [id]);
+        const result = await db.queryAwait('SELECT * FROM events WHERE id=$1', [id]);
 
         // If the event doesn't exist, redirect the user back to /events
         if (result.rowCount === 0) {

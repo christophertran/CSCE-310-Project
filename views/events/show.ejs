@@ -16,45 +16,22 @@
     <div class="show-container">
         <div class="card-body">
             <h5 class="card-title">
-                <%= club['name'] %>
+                <%= event['name'] %>
             </h5>
         </div>
         <div class="card-body">
             <ul class="list-group list-group-flush">
-                <li class="list-group-item"><strong>Description: </strong><%= club.description %></li>
+                <li class="list-group-item"><strong>Description: </strong><%= event.description %></li>
+                <li class="list-group-item"><strong>Date: </strong><%= event.date %></li>
+                <li class="list-group-item"><strong>Category: </strong><%= event.category %></li>
             </ul>
         </div>
         <div class="card-body">
-            <% if (currentUser && isMember) { %>
-            <form action="/clubs/<%= club.id %>/members?_method=DELETE" method="POST">
-                <button class="btn btn-danger">Leave Club</button>
-            </form>
-            <% } else if (currentUser) { %>
-            <form action="/clubs/<%= club.id %>/members" method="POST">
-                <button class="btn btn-warning">Join Club</button>
-            </form>
-            <% } %>
-        </div>
-
-        <% if (currentUser && (currentUser.type === 'admin' || parseInt(currentUser.id, 10) === parseInt(club.user_id, 10))) { %>
-        <div class="card-body">
-            <a href="/clubs/<%= club['id'] %>/edit" class="btn btn-success">Edit Club</a>
-        </div>
-        <% } %>
-    </div>
-
-    <div class="show-container">
-        <div class="card-body">
-            <h5>Club Members:</h5>
-        </div>
-        <div class="card-body">
-            <ul class="list-group list-group-flush">
-                <% for(let member of members) {%>
-                <li class="list-group-item">
-                    <a href="/users/<%= member.id %>"><%= member.username %></a>
-                </li>
+            <% if (currentUser && (currentUser.type === 'admin' || parseInt(currentUser.id, 10) === parseInt(event.user_id, 10))) { %>
+                <div class="card-body">
+                    <a href="/events/<%= event['id'] %>/edit" class="btn btn-success">Edit Event</a>
+                </div>
                 <% } %>
-            </ul>
         </div>
     </div>
 

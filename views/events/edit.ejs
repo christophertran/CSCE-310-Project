@@ -5,7 +5,7 @@
     <%- include("../partials/header") %>
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="/stylesheets/events.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/clubs.css" />
 </head>
 
 <body>
@@ -28,7 +28,7 @@
 
             <div class="mb-3">
                 <label class="form-label" for="description">Date</label>
-                <textarea class="form-control" type="date" id="date" name="date" required></textarea>
+                <textarea class="form-control" type="date" id="date" name="date" required><%= event.date %></textarea>
             </div>
 
             <div class="mb-3">
