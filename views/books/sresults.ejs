@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Jubey Garza and Christopher He -->
+<!-- this page displays the search results in a list based on the search form -->
+
+<head>
+    <%- include("../partials/header") %>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="/stylesheets/books.css" />
+</head>
+
+<body>
+    <%- include("../partials/navbar") %>
+    <%- include("../partials/flash") %>
+
+    <!-- Add HTML body here. -->
+    <div class="collection">
+        <button class="btn btn-success" onclick="history.back()">Go back</button>     
+        
+        <b>Your search results are below.</b>
+
+        <ul class="list-group">
+            <% for(let book of books) {%>
+            <li class="list-group-item">
+                <a href="/books/<%= book.id %>"><%= book.title %></a>
+            </li>
+            <% } %>
+        </ul>
+    </div>
+
+    <%- include("../partials/footer") %>
+</body>
+
+</html>

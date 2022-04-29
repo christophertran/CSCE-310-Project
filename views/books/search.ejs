@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!-- Jubey Garza and Christopher He -->
+<!-- This page takes input for a search of books -->
+
 <head>
     <%- include("../partials/header") %>
 
@@ -17,30 +20,20 @@
     <!-- search form -->
     <div class="container">
         <h1 class="text-center">Search for Books</h1>
-        <form action="/books" method="POST">
+        <form action="/books/sresults" method="GET">
             <div class="mb-3">
                 <label class="form-label" for="title">Title</label>
                 <input class="form-control" type="text" id="title" name="title">
             </div>
 
             <div class="mb-3">
-                <label class="form-label" for="author_first_name">Author First Name</label>
-                <input class="form-control" type="text" id="author_first_name" name="author_first_name">
+                <label class="form-label" for="first_name">Author First Name</label>
+                <input class="form-control" type="text" id="first_name" name="first_name">
             </div>
 
             <div class="mb-3">
-                <label class="form-label" for="author_last_name">Author Last Name</label>
-                <input class="form-control" type="text" id="author_last_name" name="author_last_name">
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label" for="isbn">ISBN</label>
-                <input class="form-control" type="number" id="isbn" name="isbn">
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label" for="language">Language</label>
-                <input class="form-control" type="text" id="language" name="language">
+                <label class="form-label" for="last_name">Author Last Name</label>
+                <input class="form-control" type="text" id="last_name" name="last_name">
             </div>
 
             <div class="mb-3">
@@ -48,9 +41,7 @@
                 <input class="form-control" type="text" id="genre" name="genre">
             </div>
 
-            <% if (currentUser) { %>
-                <a href="books/search"><button class="btn btn-success">Search for Books</button></a>         
-            <% } %>
+            <a href="/books/sresults"><button class="btn btn-success">Search for Books</button></a>         
         </form>
     </div>
 

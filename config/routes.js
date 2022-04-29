@@ -46,6 +46,7 @@ module.exports = (app, passport) => {
     app.post('/books', requiresLogin, catchAsync(books.createBook));
     app.get('/books/new', requiresLogin, books.renderNewForm);
     app.get('/books/search', books.renderSearchForm);
+    app.get('/books/sresults', catchAsync(books.search));
     app.get('/books/:id', catchAsync(books.showBook));
     app.put('/books/:id', requiresLogin, catchAsync(books.updateBook));
     app.delete('/books/:id', requiresLogin, catchAsync(books.deleteBook));

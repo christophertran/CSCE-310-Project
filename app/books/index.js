@@ -217,6 +217,58 @@ module.exports = {
 
     renderSearchForm: (req, res) => res.render('books/search'),
 
-    
+    /*
+    Jubey Garza and Christopher He
+
+    this function allows people to search for books based on title author or genre
+    */
+    search: async (req, res) => {
+        const { title, first_name, last_name, genre } = req.query;
+
+        query = 'SELECT * FROM books WHERE ';
+
+        // add title search value
+        if (title == '')
+            query += 'title IS NOT NULL and ';
+        else
+            query += 'UPPER(title) LIKE UPPER(\'%' + title + '%\') and ';
+
+
+        // add author search value
+        if(first_name != "" && last_name != "")
+        {
+            let authors = await db.queryAwait('SELECT * FROM authors WHERE UPPER(first_name)=$1 AND UPPER(last_name)=$2;', [first_name.toUpperCase(), last_name.toUpperCase()]);
+            const [author] = authors.rows;
+
+            if (authors.rowCount === 0)
+            {
+                req.flash('error', 'Author could not be found');
+                return res.redirect(`/books/search`);
+            }
+
+            query += 'author_id=\'' + author.id + '\' and ';
+        }
+        else
+            query += 'author_id IS NOT NULL and ';
+
+
+        // add query search value
+        if (genre == null || genre == '')
+            query += 'genre IS NOT NULL';
+        else
+            query += 'UPPER(genre) LIKE UPPER(\'%' + genre + '%\')';
+        
+        // make query to database for books that meet the search parameters
+        const result = await db.queryAwait(query);
+
+        if (result.rowCount === 0) {
+            req.flash('error', 'No books found!');
+            return res.redirect(`/books/search`);
+        }
+
+        return res.render('books/sresults', { books: result.rows });
+    },
+
+
 
 };
