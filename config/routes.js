@@ -75,7 +75,9 @@ module.exports = (app, passport) => {
     app.delete('/events/:id', requiresLogin, catchAsync(events.deleteEvent));
     app.get('/events/:id/edit', requiresLogin, catchAsync(events.renderEditForm));
 
-    app.get('/lists', lists.renderList);
+    // List routes
+    app.get('/lists', requiresLogin, catchAsync(lists.showList));
+    app.get('/lists/addRead', requiresLogin, catchAsync(lists.showList));
 
     app.get('*', (req, res) => {
         res.sendStatus(404);

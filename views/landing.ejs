@@ -4,7 +4,7 @@
 <head>
     <%- include("partials/header") %>
 
-    <!-- Custom CSS -->
+    <!-- Daniel -->
     <link rel="stylesheet" type="text/css" href="/stylesheets/landing.css" />
 </head>
 
@@ -15,7 +15,6 @@
     <div class="imgbox">
         <h1 class="slogan">Find your good book here.</h1>
 
-        <!-- <img src="/images/line_of_books.jpg" alt="line of books" class="homepage-img"> -->
     </div>
 
     <div class="grid">
@@ -28,7 +27,7 @@
                 <p>What will <i>we</i> discover today?</p>
                 <div class="imggrid">
                     <% for(let book of books) {%>
-                    <a href="/books/<%= book.id %>"><img src="<%= book.cover_url %>" alt="<%= book.title %>" width="128" height="185"></a>
+                        <a href="/books/<%= book.id %>"><img src="<%= book.cover_url %>" alt="<%= book.title %>" width="128" height="185"></a>
                     <% } %>
                 </div>
             </div>

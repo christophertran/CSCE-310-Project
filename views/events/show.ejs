@@ -2,6 +2,7 @@
 <html lang="en">
 
 <!-- Christopher He did this page -->
+<!-- This displays individual events -->
 
 <head>
     <%- include("../partials/header") %>
@@ -24,7 +25,7 @@
         <div class="card-body">
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><strong>Description: </strong><%= event.description %></li>
-                <li class="list-group-item"><strong>Date: </strong><%= event.date %></li>
+                <li class="list-group-item"><strong>Date: </strong><%= new Date(event.date).toLocaleDateString("en-US") %> <%= new Date(event.date).toLocaleTimeString("en-US") %></li>
                 <li class="list-group-item"><strong>Category: </strong><%= event.category %></li>
             </ul>
         </div>

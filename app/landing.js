@@ -1,3 +1,13 @@
+/* Daniel Ortiz-Chaves
+    This is a query for the homepage to get the number of books within the database.
+    Then it will generate 4 random possible book ids, then it will query for those random books.
+    Finally it will send the query results to the homepage to display the books.
+
+    This is done to show the user a range of books the website holds, to entice them to read more
+    books and different types of books they otherwise wouldn't read.
+
+*/
+
 const db = require('../db');
 
 function getRandNum(min, max) {
