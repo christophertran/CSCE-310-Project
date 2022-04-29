@@ -69,8 +69,11 @@ module.exports = {
         result = await db.queryAwait('SELECT reviews.*, users.username FROM reviews INNER JOIN users ON reviews.user_id=users.id WHERE reviews.book_id=$1;', [id]);
 
         const reviews = result.rows;
+        result = await db.queryAwait('SELECT * FROM authors WHERE id = $1', [book.author_id]);
 
-        return res.render('books/show', { book, reviews });
+        const [author] = result.rows;
+
+        return res.render('books/show', { book, reviews, author });
     },
 
     updateBook: async (req, res) => {
@@ -257,7 +260,7 @@ module.exports = {
             query += 'genre IS NOT NULL';
         else
             query += 'UPPER(genre) LIKE UPPER(\'%' + genre + '%\')';
-        
+
         // make query to database for books that meet the search parameters
         const result = await db.queryAwait(query);
 

@@ -21,6 +21,9 @@
             </div>
             <h5 class="card-title">
                 <%= book.title %>
+                <br>
+                <%= author.first_name %>
+                <%= author.last_name %>
             </h5>
             <p class="card-text"><%= book.description %></p>
             <% if (currentUser && (currentUser.type === 'admin' || parseInt(currentUser.id, 10) === parseInt(book.user_id, 10))) { %>
