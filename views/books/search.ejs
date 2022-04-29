@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../partials/header") %>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="/stylesheets/books.css" />
+</head>
+
+<body>
+    <%- include("../partials/navbar") %>
+    <%- include("../partials/flash") %>
+
+    <!-- Add HTML body here. -->
+
+    <!-- search form -->
+    <div class="container">
+        <h1 class="text-center">Search for Books</h1>
+        <form action="/books" method="POST">
+            <div class="mb-3">
+                <label class="form-label" for="title">Title</label>
+                <input class="form-control" type="text" id="title" name="title">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="author_first_name">Author First Name</label>
+                <input class="form-control" type="text" id="author_first_name" name="author_first_name">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="author_last_name">Author Last Name</label>
+                <input class="form-control" type="text" id="author_last_name" name="author_last_name">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="isbn">ISBN</label>
+                <input class="form-control" type="number" id="isbn" name="isbn">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="language">Language</label>
+                <input class="form-control" type="text" id="language" name="language">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="genre">Genre</label>
+                <input class="form-control" type="text" id="genre" name="genre">
+            </div>
+
+            <% if (currentUser) { %>
+                <a href="books/search"><button class="btn btn-success">Search for Books</button></a>         
+            <% } %>
+        </form>
+    </div>
+
+    
+    <%- include("../partials/footer") %>
+</body>
+
+</html>

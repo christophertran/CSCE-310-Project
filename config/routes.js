@@ -45,12 +45,14 @@ module.exports = (app, passport) => {
     app.get('/books', catchAsync(books.index));
     app.post('/books', requiresLogin, catchAsync(books.createBook));
     app.get('/books/new', requiresLogin, books.renderNewForm);
+    app.get('/books/search', books.renderSearchForm);
     app.get('/books/:id', catchAsync(books.showBook));
     app.put('/books/:id', requiresLogin, catchAsync(books.updateBook));
     app.delete('/books/:id', requiresLogin, catchAsync(books.deleteBook));
     app.get('/books/:id/edit', requiresLogin, catchAsync(books.renderEditForm));
     app.post('/books/:id/reviews', requiresLogin, catchAsync(books.createReview));
     app.delete('/books/:id/reviews/:reviewid', requiresLogin, catchAsync(books.deleteReview));
+
 
     // Clubs routes
     app.get('/clubs', catchAsync(clubs.index));

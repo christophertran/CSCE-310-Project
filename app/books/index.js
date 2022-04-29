@@ -214,4 +214,9 @@ module.exports = {
         req.flash('success', 'Successfully deleted review!');
         return res.redirect(`/books/${id}`);
     },
+
+    renderSearchForm: (req, res) => res.render('books/search'),
+
+    
+
 };

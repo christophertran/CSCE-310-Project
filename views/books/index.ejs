@@ -17,6 +17,9 @@
         <% if (currentUser) { %>
         <a href="books/new"><button class="btn btn-success">Add Book</button></a>         
         <% } %>
+
+        <a href="books/search"><button class="btn btn-success">Search for Books</button></a>         
+
         <ul class="list-group">
             <% for(let book of books) {%>
             <li class="list-group-item">
