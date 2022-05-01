@@ -14,25 +14,26 @@
 <body>
     <%- include("../partials/navbar") %>
     <%- include("../partials/flash") %>
-
+    
     <section id="tabs" class="project-tab">
         <div class="container">
             <div class="row">
-                <div class="col-md-12 w-100">
+                <div class="col-md-12">
                     <nav>
                         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                             <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Reading</a>
                             <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Favorites</a>
                         </div>
                     </nav>
-                    <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                            <div class="d-flex justify-content-between">
-                                <table class="table" cellspacing="0">      
+                    <div class="tab-content justify-content-between" id="nav-tabContent">
+                        <div class="tab-pane fade show active d-flex justify-content-between" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                            <div class="d-flex row justify-content-between" style="margin-right:1rem;">
+                                <table class="table col" cellspacing="0">      
                                     <thead>
                                         <tr>
                                             <th>Title</th>
                                             <th>Author</th>
+                                            <th>Notes</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -40,34 +41,49 @@
                                             <tr>
                                                 <td><a href="/books/<%= read.id %>"><%= read.title %></a></td>
                                                 <td><a href="/authors/<%= read.author_id %>"><%= read.author_id %></a></td>
+                                                <td><p><%= read.notes %></p></td>
+                                                <form action="/lists/reading/<%= read.id %>" method="DELETE">
+
+                                                    <td><button href="/lists/reading/<%= read.id %>" class="btn btn-secondary">Remove</button></td>
+                                                    
+                                                </form>
+                                                <!-- <td><a href="/lists/reading/<%= read.id %>" class="btn btn-secondary">Remove</a></td> -->
                                             </tr>
                                         <% } %>
                                     </tbody>
                                 </table>
-
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bookSearchModal">
-                                    Add to your reading list
-                                </button>
-
                             </div>
+                            
+                            <button style="width:160px; height:60px;" type="button" class="btn btn-primary col" data-bs-toggle="modal" data-bs-target="#bookSearchModal">
+                                Add to your reading list
+                            </button>
                         </div>
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <table class="table" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>Title</th>
-                                        <th>Author</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <% for(let fav of favorites) {%>
+                            <div class="d-flex row justify-content-between" style="margin-right:1rem;">
+                                <table class="table col" cellspacing="0">      
+                                    <thead>
                                         <tr>
-                                            <td><a href="/books/<%= fav.id %>"><%= fav.title %></a></td>
-                                            <td><a href="/authors/<%= fav.author_id %>"><%= fav.author_id %></a></td>
+                                            <th>Title</th>
+                                            <th>Author</th>
+                                            <th>Notes</th>
                                         </tr>
-                                    <% } %>
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        <% for(let fav of favorites) {%>
+                                            <tr>
+                                                <td><a href="/books/<%= fav.id %>"><%= fav.title %></a></td>
+                                                <td><a href="/authors/<%= fav.author_id %>"><%= fav.author_id %></a></td>
+                                                <td><p><%= fav.notes %></p></td>
+                                                <td><a href="/lists/favorites/<%= fav.id %>" class="btn btn-secondary">Remove</a></td>
+                                            </tr>
+                                        <% } %>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <button style="width:160px; height:60px;" type="button" class="btn btn-primary col" data-bs-toggle="modal" data-bs-target="#bookSearchModal2">
+                                Add to your favorites list
+                            </button>
                         </div>
                         </div>
                     </div>
@@ -85,15 +101,77 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="BookSearchModalLabel">Add Book to your Reading List</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                <form action="/lists/searchRead" method="GET">
+                    <div class="mb-3">
+                        <label class="form-label" for="title">Title</label>
+                        <input class="form-control" type="text" id="title" name="title">
+                    </div>
+        
+                    <div class="mb-3">
+                        <label class="form-label" for="first_name">Author First Name</label>
+                        <input class="form-control" type="text" id="first_name" name="first_name">
+                    </div>
+        
+                    <div class="mb-3">
+                        <label class="form-label" for="last_name">Author Last Name</label>
+                        <input class="form-control" type="text" id="last_name" name="last_name">
+                    </div>
+        
+                    <div class="mb-3">
+                        <label class="form-label" for="genre">Genre</label>
+                        <input class="form-control" type="text" id="genre" name="genre">
+                    </div>
+                <button href="/lists/searchRead" class="btn btn-success" data-bs-dismiss="modal">Search for Books</button>
+                    
+                </form>
             </div>
-            <!--
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            -->
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        
         </div>
     </div>
-</div>-->
+</div>
+
+<div class="modal fade" id="bookSearchModal2" tabindex="-1" aria-labelledby="bookSearchModalLabel2" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="BookSearchModalLabel2">Add Book to your Favorites List</h5>
+
+                <form action="/lists/searchFav" method="GET">
+                    <div class="mb-3">
+                        <label class="form-label" for="title">Title</label>
+                        <input class="form-control" type="text" id="title" name="title">
+                    </div>
+        
+                    <div class="mb-3">
+                        <label class="form-label" for="first_name">Author First Name</label>
+                        <input class="form-control" type="text" id="first_name" name="first_name">
+                    </div>
+        
+                    <div class="mb-3">
+                        <label class="form-label" for="last_name">Author Last Name</label>
+                        <input class="form-control" type="text" id="last_name" name="last_name">
+                    </div>
+        
+                    <div class="mb-3">
+                        <label class="form-label" for="genre">Genre</label>
+                        <input class="form-control" type="text" id="genre" name="genre">
+                    </div>
+                <button href="/lists/searchFav" class="btn btn-success" data-bs-dismiss="modal">Search for Books</button>
+                    
+                </form>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        
+        </div>
+    </div>
+</div>
 
 </html>

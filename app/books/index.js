@@ -11,13 +11,13 @@ module.exports = {
             ...req.body,
         };
 
-        // Search for the author based on first_name and last_name
-        let result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(first_name)=$1 AND UPPER(last_name)=$2;', [book.author_first_name.toUpperCase(), book.author_last_name.toUpperCase()]);
+        // Search for the author based on firstName and lastName
+        let result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(firstName)=$1 AND UPPER(lastName)=$2;', [book.author_firstName.toUpperCase(), book.author_lastName.toUpperCase()]);
 
         // If the author doesn't already exist...
         if (result.rowCount === 0) {
-            // Then create the author with the given first_name and last_name
-            result = await db.queryAwait('INSERT INTO authors(first_name, last_name, birth_date, website, bio, user_id) VALUES ($1, $2, $3, $4, $5, $6);', [book.author_first_name, book.author_last_name, null, null, null, req.user.id]);
+            // Then create the author with the given firstName and lastName
+            result = await db.queryAwait('INSERT INTO authors(firstName, lastName, birth_date, website, bio, user_id) VALUES ($1, $2, $3, $4, $5, $6);', [book.author_firstName, book.author_lastName, null, null, null, req.user.id]);
 
             // If the insert didn't work properly, redirect the user back to /books/new route
             if (result.rowCount === 0) {
@@ -26,7 +26,7 @@ module.exports = {
             }
 
             // If the insert worked properly, then query for the newly created author
-            result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(first_name)=$1 AND UPPER(last_name)=$2;', [book.author_first_name.toUpperCase(), book.author_last_name.toUpperCase()]);
+            result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(firstName)=$1 AND UPPER(lastName)=$2;', [book.author_firstName.toUpperCase(), book.author_lastName.toUpperCase()]);
         }
 
         // Get the author
@@ -90,13 +90,13 @@ module.exports = {
             return res.redirect('/books/new');
         }
 
-        // Search for the author based on first_name and last_name
-        result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(first_name)=$1 AND UPPER(last_name)=$2;', [book.author_first_name.toUpperCase(), book.author_last_name.toUpperCase()]);
+        // Search for the author based on firstName and lastName
+        result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(firstName)=$1 AND UPPER(lastName)=$2;', [book.author_firstName.toUpperCase(), book.author_lastName.toUpperCase()]);
 
         // If the author doesn't already exist...
         if (result.rowCount === 0) {
-            // Then create the author with the given first_name and last_name
-            result = await db.queryAwait('INSERT INTO authors(first_name, last_name, birth_date, website, bio) VALUES ($1, $2, $3, $4, $5);', [book.author_first_name, book.author_last_name, null, null, null]);
+            // Then create the author with the given firstName and lastName
+            result = await db.queryAwait('INSERT INTO authors(firstName, lastName, birth_date, website, bio) VALUES ($1, $2, $3, $4, $5);', [book.author_firstName, book.author_lastName, null, null, null]);
 
             // If the insert didn't work properly, redirect the user back to /books/new route
             if (result.rowCount === 0) {
@@ -105,7 +105,7 @@ module.exports = {
             }
 
             // If the insert worked properly, then query for the newly created author
-            result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(first_name)=$1 AND UPPER(last_name)=$2;', [book.author_first_name.toUpperCase(), book.author_last_name.toUpperCase()]);
+            result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(firstName)=$1 AND UPPER(lastName)=$2;', [book.author_firstName.toUpperCase(), book.author_lastName.toUpperCase()]);
         }
 
         // Get the author
@@ -226,52 +226,42 @@ module.exports = {
     this function allows people to search for books based on title author or genre
     */
     search: async (req, res) => {
-        const { title, first_name, last_name, genre } = req.query;
+        const {
+            title, firstName, lastName, genre,
+        } = req.query;
 
-        query = 'SELECT * FROM books WHERE ';
+        let query = 'SELECT * FROM books WHERE ';
 
         // add title search value
-        if (title == '')
-            query += 'title IS NOT NULL and ';
-        else
-            query += 'UPPER(title) LIKE UPPER(\'%' + title + '%\') and ';
-
+        if (title === '') query += 'title IS NOT NULL and ';
+        else query += `UPPER(title) LIKE UPPER('%${title}%') and `;
 
         // add author search value
-        if(first_name != "" && last_name != "")
-        {
-            let authors = await db.queryAwait('SELECT * FROM authors WHERE UPPER(first_name)=$1 AND UPPER(last_name)=$2;', [first_name.toUpperCase(), last_name.toUpperCase()]);
+        if (firstName !== '' && lastName !== '') {
+            const authors = await db.queryAwait('SELECT * FROM authors WHERE UPPER(firstName)=$1 AND UPPER(lastName)=$2;', [firstName.toUpperCase(), lastName.toUpperCase()]);
             const [author] = authors.rows;
 
-            if (authors.rowCount === 0)
-            {
+            if (authors.rowCount === 0) {
                 req.flash('error', 'Author could not be found');
-                return res.redirect(`/books/search`);
+                return res.redirect('/books/search');
             }
 
-            query += 'author_id=\'' + author.id + '\' and ';
-        }
-        else
-            query += 'author_id IS NOT NULL and ';
-
+            query += `author_id='${author.id}' and `;
+        } else query += 'author_id IS NOT NULL and ';
 
         // add query search value
-        if (genre == null || genre == '')
-            query += 'genre IS NOT NULL';
-        else
-            query += 'UPPER(genre) LIKE UPPER(\'%' + genre + '%\')';
+        if (genre === undefined || genre === '') query += 'genre IS NOT NULL';
+        else query += `UPPER(genre) LIKE UPPER('%${genre}%')`;
 
         // make query to database for books that meet the search parameters
         const result = await db.queryAwait(query);
 
         if (result.rowCount === 0) {
             req.flash('error', 'No books found!');
-            return res.redirect(`/books/search`);
+            return res.redirect('/books/search');
         }
 
         return res.render('books/sresults', { books: result.rows });
     },
-
-
 
 };

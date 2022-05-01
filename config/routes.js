@@ -54,7 +54,6 @@ module.exports = (app, passport) => {
     app.post('/books/:id/reviews', requiresLogin, catchAsync(books.createReview));
     app.delete('/books/:id/reviews/:reviewid', requiresLogin, catchAsync(books.deleteReview));
 
-
     // Clubs routes
     app.get('/clubs', catchAsync(clubs.index));
     app.post('/clubs', requiresLogin, catchAsync(clubs.createClub));
@@ -78,7 +77,12 @@ module.exports = (app, passport) => {
 
     // List routes
     app.get('/lists', requiresLogin, catchAsync(lists.showList));
-    app.get('/lists/addRead', requiresLogin, catchAsync(lists.showList));
+    app.get('/lists/searchRead', requiresLogin, catchAsync(lists.searchRead));
+    app.get('/lists/searchFav', requiresLogin, catchAsync(lists.searchFav));
+    app.get('/lists/addRead/:id', requiresLogin, catchAsync(lists.addRead));
+    app.get('/lists/addFav/:id', requiresLogin, catchAsync(lists.addFav));
+    app.get('/lists/reading/:id', requiresLogin, catchAsync(lists.deleteRead));
+    app.get('/lists/favorites/:id', requiresLogin, catchAsync(lists.deleteFav));
 
     app.get('*', (req, res) => {
         res.sendStatus(404);
