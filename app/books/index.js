@@ -237,7 +237,7 @@ module.exports = {
         else query += `UPPER(title) LIKE UPPER('%${title}%') and `;
 
         // add author search value
-        if ((first_name === undefined && last_name === undefined)|| (first_name === '' && last_name === '')) {
+        if ((first_name === undefined || last_name === undefined)|| (first_name === '' && last_name === '')) {
             query += 'author_id IS NOT NULL and '
         }
         else{
