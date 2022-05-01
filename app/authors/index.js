@@ -145,7 +145,7 @@ module.exports = {
     /*
     Christopher He
 
-    this function allows people to search for books based on title author or genre
+    this function allows people to search for authors based on author first or last name
     */
 
     search: async (req, res) => {
