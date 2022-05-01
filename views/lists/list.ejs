@@ -25,10 +25,17 @@
                             <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Favorites</a>
                         </div>
                     </nav>
+<<<<<<< HEAD
                     <div class="tab-content justify-content-between" id="nav-tabContent">
                         <div class="tab-pane fade show active d-flex justify-content-between" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                             <div class="d-flex row justify-content-between" style="margin-right:1rem;">
                                 <table class="table col" cellspacing="0">      
+=======
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                            <div class="d-flex justify-content-between">
+                                <table class="table" cellspacing="0">
+>>>>>>> 366e47be4ea4a85f6c7efdc0646c78c6fbbd41db
                                     <thead>
                                         <tr>
                                             <th>Title</th>
@@ -47,7 +54,6 @@
                                                     <td><button href="/lists/reading/<%= read.id %>" class="btn btn-secondary">Remove</button></td>
                                                     
                                                 </form>
-                                                <!-- <td><a href="/lists/reading/<%= read.id %>" class="btn btn-secondary">Remove</a></td> -->
                                             </tr>
                                         <% } %>
                                     </tbody>
@@ -85,10 +91,10 @@
                                 Add to your favorites list
                             </button>
                         </div>
-                        </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </section>
     <%- include("../partials/footer") %>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Christopher He -->
+<!-- This page takes input for a search of authors -->
+
+<head>
+    <%- include("../partials/header") %>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="/stylesheets/authors.css" />
+</head>
+
+<body>
+    <%- include("../partials/navbar") %>
+    <%- include("../partials/flash") %>
+
+    <!-- Add HTML body here. -->
+
+    <!-- search form -->
+    <div class="container">
+        <h1 class="text-center">Search for Authors</h1>
+        <form action="/authors/sresults" method="GET">
+            <div class="mb-3">
+                <label class="form-label" for="first_name">Author First Name</label>
+                <input class="form-control" type="text" id="first_name" name="first_name">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="last_name">Author Last Name</label>
+                <input class="form-control" type="text" id="last_name" name="last_name">
+            </div>
+
+
+            <a href="/authors/sresults"><button class="btn btn-success">Search for Authors</button></a>
+        </form>
+    </div>
+
+
+    <%- include("../partials/footer") %>
+</body>
+
+</html>

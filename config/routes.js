@@ -36,6 +36,8 @@ module.exports = (app, passport) => {
     app.get('/authors', catchAsync(authors.index));
     app.post('/authors', requiresLogin, catchAsync(authors.createAuthor));
     app.get('/authors/new', requiresLogin, authors.renderNewForm);
+    app.get('/authors/search', authors.renderSearchForm);
+    app.get('/authors/sresults', catchAsync(authors.search));
     app.get('/authors/:id', catchAsync(authors.showAuthor));
     app.put('/authors/:id', requiresLogin, catchAsync(authors.updateAuthor));
     app.delete('/authors/:id', requiresLogin, catchAsync(authors.deleteAuthor));

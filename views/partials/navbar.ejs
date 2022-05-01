@@ -7,7 +7,6 @@
     </a>
 
     <div class="nav-btn-grp">
-        <a href="/lists" title="Lists" class="nav-link">Lists</a>
         <a href="/clubs" title="Clubs" class="nav-link">Clubs</a>
         <a href="/books" title="Books" class="nav-link">Books</a>
         <a href="/authors" title="Authors" class="nav-link">Authors</a>
@@ -21,6 +20,7 @@
     </div>
     <% } else { %>
     <div class="nav-btn-grp">
+        <a href="/lists" title="Lists" class="nav-link">Lists</a>
         <a href="/users/<%= currentUser.id %>" title="Profile" class="nav-link">Profile</a>
         <a href="/logout" title="Logout" class="nav-link">Logout</a>
     </div>
