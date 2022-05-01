@@ -28,7 +28,7 @@
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                             <div class="d-flex justify-content-between">
-                                <table class="table" cellspacing="0">      
+                                <table class="table" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>Title</th>
@@ -37,10 +37,10 @@
                                     </thead>
                                     <tbody>
                                         <% for(let read of toReads) {%>
-                                            <tr>
-                                                <td><a href="/books/<%= read.id %>"><%= read.title %></a></td>
-                                                <td><a href="/authors/<%= read.author_id %>"><%= read.author_id %></a></td>
-                                            </tr>
+                                        <tr>
+                                            <td><a href="/books/<%= read.id %>"><%= read.title %></a></td>
+                                            <td><a href="/authors/<%= read.author_id %>"><%= read.author_id %></a></td>
+                                        </tr>
                                         <% } %>
                                     </tbody>
                                 </table>
@@ -61,18 +61,18 @@
                                 </thead>
                                 <tbody>
                                     <% for(let fav of favorites) {%>
-                                        <tr>
-                                            <td><a href="/books/<%= fav.id %>"><%= fav.title %></a></td>
-                                            <td><a href="/authors/<%= fav.author_id %>"><%= fav.author_id %></a></td>
-                                        </tr>
+                                    <tr>
+                                        <td><a href="/books/<%= fav.id %>"><%= fav.title %></a></td>
+                                        <td><a href="/authors/<%= fav.author_id %>"><%= fav.author_id %></a></td>
+                                    </tr>
                                     <% } %>
                                 </tbody>
                             </table>
                         </div>
-                        </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </section>
     <%- include("../partials/footer") %>
