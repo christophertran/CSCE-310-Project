@@ -19,13 +19,15 @@
             <div class="book-cover-container">
                 <img class="card-img-top" src="<%= book.cover_url %>" alt="<%= book.title %>">
             </div>
-            <h5 class="card-title">
-                <%= book.title %>
-                <br>
-                <%= author.first_name %>
-                <%= author.last_name %>
-            </h5>
-            <p class="card-text"><%= book.description %></p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Title: </strong><%= book.title %></li>
+                <li class="list-group-item"><strong>Author: </strong><%= author.first_name %> <%= author.last_name %></li>
+                <li class="list-group-item"><strong>Genre: </strong><%= book.genre %></li>
+                <li class="list-group-item"><strong>Country: </strong><%= author.country %></li>
+                <li class="list-group-item"><strong>Language: </strong><%= book.language %></li>
+                <li class="list-group-item"><strong>ISBN: </strong><%= book.isbn %></li>
+                <li class="list-group-item"><strong>Description: </strong><%= book.description %></li>
+            </ul>
             <% if (currentUser && (currentUser.type === 'admin' || parseInt(currentUser.id, 10) === parseInt(book.user_id, 10))) { %>
             <a href="/books/<%= book.id %>/edit" class="btn btn-success">Edit Book</a>
             <% } %>
