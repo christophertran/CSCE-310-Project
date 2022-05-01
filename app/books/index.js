@@ -238,7 +238,6 @@ module.exports = {
 
         // add author search value
         if ((first_name === undefined && last_name === undefined)|| (first_name === '' && last_name === '')) {
-          console.log('test');
             query += 'author_id IS NOT NULL and '
         }
         else{
@@ -266,7 +265,6 @@ module.exports = {
         // add query search value
         if (genre === undefined || genre === '') query += 'genre IS NOT NULL;';
         else query += `UPPER(genre) LIKE UPPER('%${genre}%');`;
-        console.log(query);
         // make query to database for books that meet the search parameters
         const result = await db.queryAwait(query);
 
