@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Jubey Garza and Christopher He -->
+<!--  Christopher He -->
 <!-- this page displays the search results in a list based on the search form -->
 
 <head>
     <%- include("../partials/header") %>
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="/stylesheets/books.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/authors.css" />
 </head>
 
 <body>
@@ -22,9 +22,9 @@
         <b>Your search results are below.</b>
 
         <ul class="list-group">
-            <% for(let book of books) {%>
+            <% for(let author of authors) {%>
             <li class="list-group-item">
-                <a href="/books/<%= book.id %>"><%= book.title %></a>
+                <a href="/authors/<%= author.id %>"><%= author.first_name + ' ' + author.last_name %></a>
             </li>
             <% } %>
         </ul>

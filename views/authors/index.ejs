@@ -15,8 +15,11 @@
     <!-- Add HTML body here. -->
     <div class="collection">
         <% if (currentUser) { %>
-        <a href="authors/new"><button class="btn btn-success">Add Author</button></a>         
+        <a href="authors/new"><button class="btn btn-success">Add Author</button></a>
         <% } %>
+
+        <a href="authors/search"><button class="btn btn-success">Search for Authors</button></a>
+
         <ul class="list-group">
             <% for(let author of authors) {%>
             <li class="list-group-item">

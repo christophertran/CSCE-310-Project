@@ -139,4 +139,38 @@ module.exports = {
 
         return res.render('authors/edit', { author });
     },
+
+    renderSearchForm: (req, res) => res.render('authors/search'),
+
+    /*
+    Christopher He
+
+    this function allows people to search for books based on title author or genre
+    */
+
+    search: async (req, res) => {
+        const { first_name, last_name } = req.query;
+
+        query = 'SELECT * FROM authors WHERE ';
+
+        // add title search value
+        if (first_name == '')
+            query += 'first_name IS NOT NULL and ';
+        else
+            query += 'UPPER(first_name) LIKE UPPER(\'%' + first_name + '%\') and ';
+
+        if (last_name == '')
+            query += 'last_name IS NOT NULL';
+        else
+            query += 'UPPER(last_name) LIKE UPPER(\'%' + last_name + '%\')';
+
+        const result = await db.queryAwait(query);
+
+        if (result.rowCount === 0) {
+            req.flash('error', 'No authors found!');
+            return res.redirect(`/authors/search`);
+        }
+
+        return res.render('authors/sresults', { authors: result.rows });
+    },
 };
