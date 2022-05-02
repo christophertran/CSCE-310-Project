@@ -26,12 +26,12 @@ module.exports = {
         }
 
         // Search for the author based on firstName and lastName
-        result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(first_name)=$1 AND UPPER(last_name)=$2;', [event.author_first_name.toUpperCase(), event.author_last_name.toUpperCase()]);
+        result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(first_name)=$1 AND UPPER(last_name)=$2;', [event.author_f.toUpperCase(), event.author_l.toUpperCase()]);
 
         // If the author doesn't already exist...
         if (result.rowCount === 0) {
             // Then create the author with the given firstName and lastName
-            result = await db.queryAwait('INSERT INTO authors(first_name, last_name, birth_date, website, bio) VALUES ($1, $2, $3, $4, $5);', [event.author_first_name, event.author_last_name, null, null, null]);
+            result = await db.queryAwait('INSERT INTO authors(first_name, last_name, birth_date, website, bio) VALUES ($1, $2, $3, $4, $5);', [event.author_f, event.author_l, null, null, null]);
 
             // If the insert didn't work properly, redirect the user back to /books/new route
             if (result.rowCount === 0) {
@@ -40,7 +40,7 @@ module.exports = {
             }
 
             // If the insert worked properly, then query for the newly created author
-            result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(first_name)=$1 AND UPPER(last_name)=$2;', [event.author_first_name.toUpperCase(), event.author_last_name.toUpperCase()]);
+            result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(first_name)=$1 AND UPPER(last_name)=$2;', [event.author_f.toUpperCase(), event.author_l.toUpperCase()]);
         }
 
         // Get the author
@@ -112,12 +112,12 @@ module.exports = {
         }
 
         // Search for the author based on firstName and lastName
-        result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(first_name)=$1 AND UPPER(last_name)=$2;', [event.author_first_name.toUpperCase(), event.author_last_name.toUpperCase()]);
+        result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(first_name)=$1 AND UPPER(last_name)=$2;', [event.author_f.toUpperCase(), event.author_l.toUpperCase()]);
 
         // If the author doesn't already exist...
         if (result.rowCount === 0) {
             // Then create the author with the given firstName and lastName
-            result = await db.queryAwait('INSERT INTO authors(first_name, last_name, birth_date, website, bio) VALUES ($1, $2, $3, $4, $5);', [event.author_first_name, event.author_last_name, null, null, null]);
+            result = await db.queryAwait('INSERT INTO authors(first_name, last_name, birth_date, website, bio) VALUES ($1, $2, $3, $4, $5);', [event.author_f, event.author_l, null, null, null]);
 
             // If the insert didn't work properly, redirect the user back to /books/new route
             if (result.rowCount === 0) {
@@ -126,7 +126,7 @@ module.exports = {
             }
 
             // If the insert worked properly, then query for the newly created author
-            result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(first_name)=$1 AND UPPER(last_name)=$2;', [event.author_first_name.toUpperCase(), event.author_last_name.toUpperCase()]);
+            result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(first_name)=$1 AND UPPER(last_name)=$2;', [event.author_f.toUpperCase(), event.author_l.toUpperCase()]);
         }
 
         // Get the author
