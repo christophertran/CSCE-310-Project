@@ -21,29 +21,71 @@
                 <input class="disabled form-control" type="text" id="username" name="username" value="<%= user.username %>" required>
             </div>
 
+            <% if (currentUser && parseInt(currentUser.id, 10) === parseInt(user.id, 10)) { %>
             <div class="mb-3">
                 <label class="form-label" for="email">Email</label>
                 <input class="form-control" type="email" id="email" name="email" value="<%= user.email %>">
             </div>
+            <% } else { %>
+            <div class="mb-3">
+                <label class="form-label" for="email">Email</label>
+                <input class="disabled form-control" type="email" id="email" name="email" value="<%= user.email %>">
+            </div>
+            <% } %>
 
+            <% if (currentUser && parseInt(currentUser.id, 10) === parseInt(user.id, 10)) { %>
             <div class="mb-3">
                 <label class="form-label" for="language">Language</label>
                 <input class="form-control" type="text" id="language" name="language" value="<%= user.language %>">
             </div>
+            <% } else { %>
+            <div class="mb-3">
+                <label class="form-label" for="language">Language</label>
+                <input class="disabled form-control" type="text" id="language" name="language" value="<%= user.language %>">
+            </div>
+            <% } %>
 
+            <% if (currentUser && parseInt(currentUser.id, 10) === parseInt(user.id, 10)) { %>
             <div class="mb-3">
                 <label class="form-label" for="country">Country</label>
                 <input class="form-control" type="text" id="country" name="country" value="<%= user.country %>">
             </div>
+            <% } else { %>
+            <div class="mb-3">
+                <label class="form-label" for="country">Country</label>
+                <input class="disabled form-control" type="text" id="country" name="country" value="<%= user.country %>">
+            </div>
+            <% } %>
 
+            <% if (currentUser && parseInt(currentUser.id, 10) === parseInt(user.id, 10)) { %>
             <div class="mb-3">
                 <label class="form-label" for="favorite_genre">Favorite Genre</label>
                 <input class="form-control" type="text" id="favorite_genre" name="favorite_genre" value="<%= user.favorite_genre %>">
             </div>
+            <% } else { %>
+            <div class="mb-3">
+                <label class="form-label" for="favorite_genre">Favorite Genre</label>
+                <input class="disabled form-control" type="text" id="favorite_genre" name="favorite_genre" value="<%= user.favorite_genre %>">
+            </div>
+            <% } %>
 
+            <% if (currentUser.type === 'admin') { %>
+            <div class="mb-3">
+                <label class="form-label" for="type">User Type</label>
+                <input class="form-control" type="text" id="type" name="type" value="<%= user.type %>">
+            </div>
+            <% } else { %>
+            <div class="mb-3">
+                <label class="form-label" for="type">User Type</label>
+                <input class="disabled form-control" type="text" id="type" name="type" value="<%= user.type %>">
+            </div>
+            <% } %>
+
+            <% if (currentUser && (currentUser.type === 'admin' || parseInt(currentUser.id, 10) === parseInt(user.id, 10))) { %>
             <div class="mb-3">
                 <button class="btn btn-success">Edit User</button>
             </div>
+            <% } %>
         </form>
 
         <!--

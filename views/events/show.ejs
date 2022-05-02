@@ -33,10 +33,10 @@
         </div>
         <div class="card-body">
             <% if (currentUser && (currentUser.type === 'admin' || parseInt(currentUser.id, 10) === parseInt(event.user_id, 10))) { %>
-                <div class="card-body">
-                    <a href="/events/<%= event['id'] %>/edit" class="btn btn-success">Edit Event</a>
-                </div>
-                <% } %>
+            <div class="card-body">
+                <a href="/events/<%= event['id'] %>/edit" class="btn btn-success">Edit Event</a>
+            </div>
+            <% } %>
         </div>
     </div>
 

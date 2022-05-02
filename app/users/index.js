@@ -58,7 +58,7 @@ module.exports = {
             ...req.body,
         };
 
-        if (parseInt(req.user.id, 10) !== parseInt(id, 10)) {
+        if (parseInt(req.user.id, 10) !== parseInt(id, 10) && req.user.type !== 'admin') {
             req.flash('error', "You don't have permission to do that!");
             return res.redirect('/');
         }
@@ -70,7 +70,7 @@ module.exports = {
             return res.redirect('/');
         }
 
-        result = await db.queryAwait('UPDATE public.users SET username=$1, email=$2, language=$3, country=$4, favorite_genre=$5 WHERE id=$6;', [user.username, user.email, user.language, user.country, user.favorite_genre, id]);
+        result = await db.queryAwait('UPDATE public.users SET username=$1, email=$2, language=$3, country=$4, favorite_genre=$5, type=$6 WHERE id=$7;', [user.username, user.email, user.language, user.country, user.favorite_genre, user.type, id]);
 
         if (result.rowCount === 0) {
             req.flash('error', 'Error updating user information!');
@@ -86,7 +86,7 @@ module.exports = {
     renderEditForm: async (req, res) => {
         const { id } = req.params;
 
-        if (parseInt(req.user.id, 10) !== parseInt(id, 10)) {
+        if (parseInt(req.user.id, 10) !== parseInt(id, 10) && req.user.type !== 'admin') {
             req.flash('error', "You don't have permission to do that!");
             return res.redirect('/');
         }

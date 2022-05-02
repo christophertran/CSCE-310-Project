@@ -21,10 +21,11 @@
                 <li class="list-group-item"><strong>Language: </strong><%= user.language %></li>
                 <li class="list-group-item"><strong>Country: </strong><%= user.country %></li>
                 <li class="list-group-item"><strong>Favorite Genre: </strong><%= user.favorite_genre %></li>
+                <li class="list-group-item"><strong>User Type: </strong><%= user.type %></li>
             </ul>
         </div>
 
-        <% if (currentUser && parseInt(currentUser.id, 10) === parseInt(user.id, 10)) { %>
+        <% if (currentUser && (currentUser.type === 'admin' || parseInt(currentUser.id, 10) === parseInt(user.id, 10))) { %>
         <div class="card-body">
             <a href="/users/<%= user.id %>/edit" class="btn btn-success">Edit User</a>
         </div>
