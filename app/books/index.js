@@ -91,7 +91,7 @@ module.exports = {
         // }
 
         // Search for the author based on first_name and last_name
-        result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(first_name)=$1 AND UPPER(last_name)=$2;', [book.author_first_name.toUpperCase(), book.author_last_name.toUpperCase()]);
+        let result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(first_name)=$1 AND UPPER(last_name)=$2;', [book.author_first_name.toUpperCase(), book.author_last_name.toUpperCase()]);
 
         // If the author doesn't already exist...
         if (result.rowCount === 0) {
