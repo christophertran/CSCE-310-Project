@@ -12,12 +12,12 @@ module.exports = {
         };
 
         // Search for the author based on firstName and lastName
-        let result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(firstName)=$1 AND UPPER(lastName)=$2;', [book.author_firstName.toUpperCase(), book.author_lastName.toUpperCase()]);
+        let result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(firstName)=$1 AND UPPER(lastName)=$2;', [book.author_first_name.toUpperCase(), book.author_last_name.toUpperCase()]);
 
         // If the author doesn't already exist...
         if (result.rowCount === 0) {
             // Then create the author with the given firstName and lastName
-            result = await db.queryAwait('INSERT INTO authors(firstName, lastName, birth_date, website, bio, user_id) VALUES ($1, $2, $3, $4, $5, $6);', [book.author_firstName, book.author_lastName, null, null, null, req.user.id]);
+            result = await db.queryAwait('INSERT INTO authors(firstName, lastName, birth_date, website, bio, user_id) VALUES ($1, $2, $3, $4, $5, $6);', [book.author_first_name, book.author_last_name, null, null, null, req.user.id]);
 
             // If the insert didn't work properly, redirect the user back to /books/new route
             if (result.rowCount === 0) {
@@ -26,7 +26,7 @@ module.exports = {
             }
 
             // If the insert worked properly, then query for the newly created author
-            result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(firstName)=$1 AND UPPER(lastName)=$2;', [book.author_firstName.toUpperCase(), book.author_lastName.toUpperCase()]);
+            result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(firstName)=$1 AND UPPER(lastName)=$2;', [book.author_first_name.toUpperCase(), book.author_last_name.toUpperCase()]);
         }
 
         // Get the author
@@ -91,12 +91,12 @@ module.exports = {
         }
 
         // Search for the author based on firstName and lastName
-        result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(firstName)=$1 AND UPPER(lastName)=$2;', [book.author_firstName.toUpperCase(), book.author_lastName.toUpperCase()]);
+        result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(firstName)=$1 AND UPPER(lastName)=$2;', [book.author_first_name.toUpperCase(), book.author_lastName.toUpperCase()]);
 
         // If the author doesn't already exist...
         if (result.rowCount === 0) {
             // Then create the author with the given firstName and lastName
-            result = await db.queryAwait('INSERT INTO authors(firstName, lastName, birth_date, website, bio) VALUES ($1, $2, $3, $4, $5);', [book.author_firstName, book.author_lastName, null, null, null]);
+            result = await db.queryAwait('INSERT INTO authors(firstName, lastName, birth_date, website, bio) VALUES ($1, $2, $3, $4, $5);', [book.author_first_name, book.author_lastName, null, null, null]);
 
             // If the insert didn't work properly, redirect the user back to /books/new route
             if (result.rowCount === 0) {
@@ -105,7 +105,7 @@ module.exports = {
             }
 
             // If the insert worked properly, then query for the newly created author
-            result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(firstName)=$1 AND UPPER(lastName)=$2;', [book.author_firstName.toUpperCase(), book.author_lastName.toUpperCase()]);
+            result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(firstName)=$1 AND UPPER(lastName)=$2;', [book.author_first_name.toUpperCase(), book.author_lastName.toUpperCase()]);
         }
 
         // Get the author
@@ -237,18 +237,17 @@ module.exports = {
         else query += `UPPER(title) LIKE UPPER('%${title}%') and `;
 
         // add author search value
-        if ((first_name === undefined || last_name === undefined)|| (first_name === '' && last_name === '')) {
-            query += 'author_id IS NOT NULL and '
-        }
-        else{
+        if ((first_name === undefined || last_name === undefined) || (first_name === '' && last_name === '')) {
+            query += 'author_id IS NOT NULL and ';
+        } else {
             const authors = await db.queryAwait(`SELECT * FROM authors WHERE UPPER(first_name) LIKE UPPER('%${first_name}%') AND UPPER(last_name) LIKE UPPER('%${last_name}%');`);
             const [author] = authors.rows;
 
             if (authors.rowCount === 0) {
                 req.flash('error', 'Author could not be found');
                 return res.redirect('/books/search');
-              }
-              query += `author_id='${author.id}' and `;
+            }
+            query += `author_id='${author.id}' and `;
         }
         // if (first_name !== undefined || last_name !== undefined) {
         //     const authors = await db.queryAwait(`SELECT * FROM authors WHERE UPPER(first_name) LIKE UPPER('%${first_name}%') AND UPPER(last_name) LIKE UPPER('%${last_name}%');`);

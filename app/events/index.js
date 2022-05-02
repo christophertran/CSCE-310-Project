@@ -132,7 +132,6 @@ module.exports = {
         // Get the author
         const [author] = result.rows;
 
-
         // If the event does exist, then we update the event
         result = await db.queryAwait('UPDATE events SET name=$1, description=$2, date=$3, category=$4, author_id=$5, admission_link=$6 WHERE id=$7;', [event.name, event.description, event.date, event.category, author.id, event.admission_link, id]);
 

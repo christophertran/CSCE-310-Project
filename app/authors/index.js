@@ -154,21 +154,17 @@ module.exports = {
         query = 'SELECT * FROM authors WHERE ';
 
         // add title search value
-        if (first_name == '')
-            query += 'first_name IS NOT NULL and ';
-        else
-            query += 'UPPER(first_name) LIKE UPPER(\'%' + first_name + '%\') and ';
+        if (first_name == '') query += 'first_name IS NOT NULL and ';
+        else query += `UPPER(first_name) LIKE UPPER('%${first_name}%') and `;
 
-        if (last_name == '')
-            query += 'last_name IS NOT NULL';
-        else
-            query += 'UPPER(last_name) LIKE UPPER(\'%' + last_name + '%\')';
+        if (last_name == '') query += 'last_name IS NOT NULL';
+        else query += `UPPER(last_name) LIKE UPPER('%${last_name}%')`;
 
         const result = await db.queryAwait(query);
 
         if (result.rowCount === 0) {
             req.flash('error', 'No authors found!');
-            return res.redirect(`/authors/search`);
+            return res.redirect('/authors/search');
         }
 
         return res.render('authors/sresults', { authors: result.rows });
