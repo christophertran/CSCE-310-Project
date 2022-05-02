@@ -82,13 +82,13 @@ module.exports = {
             ...req.body,
         };
 
-        let result = await db.queryAwait('SELECT * FROM books WHERE UPPER(title)=$1 AND isbn=$2;', [book.title.toUpperCase(), book.isbn]);
+        // let result = await db.queryAwait('SELECT * FROM books WHERE UPPER(title)=$1 AND isbn=$2;', [book.title.toUpperCase(), book.isbn]);
 
-        // If the book already exists, redirect the user back to /books/new
-        if (result.rowCount !== 0) {
-            req.flash('error', 'Book already exists!');
-            return res.redirect('/books/new');
-        }
+        // // If the book already exists, redirect the user back to /books/new
+        // if (result.rowCount !== 0) {
+        //     req.flash('error', 'Book already exists!');
+        //     return res.redirect('/books/new');
+        // }
 
         // Search for the author based on first_name and last_name
         result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(first_name)=$1 AND UPPER(last_name)=$2;', [book.author_first_name.toUpperCase(), book.author_last_name.toUpperCase()]);
