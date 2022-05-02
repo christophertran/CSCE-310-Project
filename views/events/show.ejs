@@ -25,8 +25,10 @@
         <div class="card-body">
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><strong>Description: </strong><%= event.description %></li>
+                <li class="list-group-item"><strong>Author: </strong><%= author.first_name %> <%= author.last_name %></li>
                 <li class="list-group-item"><strong>Date: </strong><%= new Date(event.date).toLocaleDateString("en-US") %> <%= new Date(event.date).toLocaleTimeString("en-US") %></li>
                 <li class="list-group-item"><strong>Category: </strong><%= event.category %></li>
+                <li class="list-group-item"><strong>Admission link: </strong><%= event.admission_link %></li>
             </ul>
         </div>
         <div class="card-body">

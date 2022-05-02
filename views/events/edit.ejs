@@ -25,22 +25,33 @@
             </div>
 
             <div class="mb-3">
+                <label class="form-label" for="first_name">Author First Name</label>
+                <input class="form-control" type="text" id="first_name" name="first_name" value="<%= author.first_name %>" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="last_name">Author Last Name</label>
+                <input class="form-control" type="text" id="last_name" name="last_name" value="<%= author.last_name %>" required>
+            </div>
+
+            <div class="mb-3">
                 <label class="form-label" for="description">Description</label>
-                <textarea class="form-control" type="text" id="description" name="description" required><%= event.description %></textarea>
+                <input class="form-control" type="text" id="description" name="description" value="<%= event.description %>" required>
             </div>
 
             <div class="mb-3">
-                <label class="form-label" for="description">Date</label>
-                <textarea class="form-control" type="date" id="date" name="date" required><%= event.date %></textarea>
+                <label class="form-label" for="date">Date</label>
+                <input class="form-control" type="date" id="date" name="date" value="<%= new Date(event.date).toISOString().split('T')[0] %>" required>
             </div>
 
             <div class="mb-3">
-                <label class="form-label" for="description">Category</label>
-                <textarea class="form-control" type="text" id="category" name="category" required><%= event.category %></textarea>
+                <label class="form-label" for="category">Category</label>
+                <input class="form-control" type="text" id="category" name="category" value="<%= event.category %>" required>
             </div>
 
             <div class="mb-3">
-                <button class="btn btn-success">Edit Event</button>
+                <label class="form-label" for="admission_link">Admission link</label>
+                <input class="form-control" type="text" id="admission_link" name="admission_link" value="<%= event.admission_link %>">
             </div>
         </form>
 

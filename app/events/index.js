@@ -25,8 +25,29 @@ module.exports = {
             return res.redirect('/Events/new');
         }
 
+        // Search for the author based on firstName and lastName
+        result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(first_name)=$1 AND UPPER(last_name)=$2;', [event.author_f.toUpperCase(), event.author_l.toUpperCase()]);
+
+        // If the author doesn't already exist...
+        if (result.rowCount === 0) {
+            // Then create the author with the given firstName and lastName
+            result = await db.queryAwait('INSERT INTO authors(first_name, last_name, birth_date, website, bio) VALUES ($1, $2, $3, $4, $5);', [event.author_f, event.author_l, null, null, null]);
+
+            // If the insert didn't work properly, redirect the user back to /books/new route
+            if (result.rowCount === 0) {
+                req.flash('error', 'Error inserting author!');
+                return res.redirect('/events/new');
+            }
+
+            // If the insert worked properly, then query for the newly created author
+            result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(first_name)=$1 AND UPPER(last_name)=$2;', [event.author_f.toUpperCase(), event.author_l.toUpperCase()]);
+        }
+
+        // Get the author
+        const [author] = result.rows;
+
         // If the event doesn't already exist, then we insert the new event
-        result = await db.queryAwait('INSERT INTO Events(user_id, name, description, date, category) VALUES ($1, $2, $3, $4, $5);', [req.user.id, event.name, event.description, event.date, event.category]);
+        result = await db.queryAwait('INSERT INTO Events(user_id, name, description, date, category, author_id, admission_link) VALUES ($1, $2, $3, $4, $5, $6, $7);', [req.user.id, event.name, event.description, event.date, event.category, author.id, event.admission_link]);
 
         // If the insert isn't successful, redirect the user back to /events/new
         if (result.rowCount === 0) {
@@ -51,7 +72,7 @@ module.exports = {
         const { id } = req.params;
 
         // Look for Event by id
-        const result = await db.queryAwait('SELECT * FROM events WHERE id=$1', [id]);
+        let result = await db.queryAwait('SELECT * FROM events WHERE id=$1', [id]);
 
         // If the event doesn't exist, redirect the user back to /Events
         if (result.rowCount === 0) {
@@ -61,7 +82,17 @@ module.exports = {
 
         const [event] = result.rows;
 
-        return res.render('events/show', { event });
+        result = await db.queryAwait('SELECT * FROM authors WHERE id=$1', [event.author_id]);
+
+        // If the event doesn't exist, redirect the user back to /Events
+        if (result.rowCount === 0) {
+            req.flash('error', "The author requested doesn't exist!");
+            return res.redirect('/events');
+        }
+
+        const [author] = result.rows;
+
+        return res.render('events/show', { event, author });
     },
 
     // this function gets updates data for an event instance
@@ -80,8 +111,30 @@ module.exports = {
             return res.redirect('/events');
         }
 
+        // Search for the author based on firstName and lastName
+        result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(first_name)=$1 AND UPPER(last_name)=$2;', [event.author_f.toUpperCase(), book.author_l.toUpperCase()]);
+
+        // If the author doesn't already exist...
+        if (result.rowCount === 0) {
+            // Then create the author with the given firstName and lastName
+            result = await db.queryAwait('INSERT INTO authors(first_name, last_name, birth_date, website, bio) VALUES ($1, $2, $3, $4, $5);', [event.author_f, event.author_l, null, null, null]);
+
+            // If the insert didn't work properly, redirect the user back to /books/new route
+            if (result.rowCount === 0) {
+                req.flash('error', 'Error inserting author!');
+                return res.redirect('/events/new');
+            }
+
+            // If the insert worked properly, then query for the newly created author
+            result = await db.queryAwait('SELECT * FROM authors WHERE UPPER(first_name)=$1 AND UPPER(last_name)=$2;', [event.author_f.toUpperCase(), event.author_l.toUpperCase()]);
+        }
+
+        // Get the author
+        const [author] = result.rows;
+
+
         // If the event does exist, then we update the event
-        result = await db.queryAwait('UPDATE events SET name=$1, description=$2, date=$3, category=$4 WHERE id=$5;', [event.name, event.description, event.date, event.category, id]);
+        result = await db.queryAwait('UPDATE events SET name=$1, description=$2, date=$3, category=$4, author_id=$5, admission_link=$6 WHERE id=$7;', [event.name, event.description, event.date, event.category, author.id, event.admission_link, id]);
 
         // If the update isn't successful, redirect the user back to /events/:id/edit
         if (result.rowCount === 0) {
@@ -126,7 +179,7 @@ module.exports = {
         const { id } = req.params;
 
         // Look for event by id
-        const result = await db.queryAwait('SELECT * FROM events WHERE id=$1', [id]);
+        let result = await db.queryAwait('SELECT * FROM events WHERE id=$1', [id]);
 
         // If the event doesn't exist, redirect the user back to /events
         if (result.rowCount === 0) {
@@ -134,9 +187,19 @@ module.exports = {
             return res.redirect('/events');
         }
 
-        // Render the edit page
         const [event] = result.rows;
-        return res.render('events/edit', { event });
+        result = await db.queryAwait('SELECT * FROM authors WHERE id=$1', [event.author_id]);
+
+        // If the event doesn't exist, redirect the user back to /Events
+        if (result.rowCount === 0) {
+            req.flash('error', "The author requested doesn't exist!");
+            return res.redirect('/events');
+        }
+
+        const [author] = result.rows;
+
+        // Render the edit page
+        return res.render('events/edit', { event, author });
     },
 
 };
