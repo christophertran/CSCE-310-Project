@@ -53,6 +53,10 @@
                 <label class="form-label" for="admission_link">Admission link</label>
                 <input class="form-control" type="text" id="admission_link" name="admission_link" value="<%= event.admission_link %>">
             </div>
+
+            <div class="mb-3">
+                <button class="btn btn-success">Edit Event</button>
+            </div>
         </form>
 
         <form action="/events/<%= event.id %>?_method=DELETE" method="POST">
